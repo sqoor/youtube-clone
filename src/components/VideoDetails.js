@@ -1,15 +1,15 @@
 import React, { Component } from 'react'
 
-export class VideoDetail extends Component {
+export class VideoDetails extends Component {
     render() {
         return (
             <div>
-                
+                Video Details
             </div>
         )
     }
 }
 
-export default VideoDetail
+export default VideoDetails
 
 

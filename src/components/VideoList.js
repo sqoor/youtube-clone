@@ -4,7 +4,7 @@ export class VideoList extends Component {
     render() {
         return (
             <div>
-                
+                Suggested Video List 
             </div>
         )
     }
