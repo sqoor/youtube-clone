@@ -12,16 +12,28 @@ export class SearchBar extends Component {
     render() {
         return (
             <header>
-                <form onSubmit={this.submit}>
-                    <input 
-                        ref={elem => this.searchInput = elem}
-                        name="search"
-                        className="w-25"
-                        type="search"
-                        placeholder="Search"
-                    />
-                    <button>Search</button>
-                </form>
+
+
+                <ul className="nav justify-content-center pt-2 pb-4">
+                    <li className="nav-item">
+                    </li>
+                    <li className="nav-item">
+                    </li>
+                    <li className="nav-item w-75">
+                        <form onSubmit={this.submit}>
+                            <input
+                                ref={elem => this.searchInput = elem}
+                                name="search"
+                                className="w-25"
+                                type="search"
+                                placeholder="Search"
+                            />
+                            <button>Search</button>
+                        </form>
+                    </li>
+                    <li className="nav-item">
+                    </li>
+                </ul>
             </header>
         )
     }

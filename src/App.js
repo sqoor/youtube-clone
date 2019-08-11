@@ -4,7 +4,7 @@ import axios from 'axios';
 import SearchBar from './components/SearchBar';
 
 import './App.css';
-import VideoItem from './components/VideoItem';
+import Watch from './components/Watch';
 
 class App extends Component {
   state = {
@@ -34,7 +34,7 @@ class App extends Component {
     return (
       <div className="App">
         <SearchBar searchVideos={this.searchVideos} />
-        <VideoItem videos={this.state.videos} />
+        <Watch videos={this.state.videos} />
       </div>
     );
   }
