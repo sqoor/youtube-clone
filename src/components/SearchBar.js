@@ -11,10 +11,10 @@ export class SearchBar extends Component {
 
     render() {
         return (
-            <header>
+            <header className="mb-5">
 
 
-                <ul className="nav justify-content-center pt-2 pb-4">
+                <ul className="nav justify-content-center fixed-top pt-2 pb-4">
                     <li className="nav-item">
                     </li>
                     <li className="nav-item">

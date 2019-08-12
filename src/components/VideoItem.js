@@ -23,13 +23,13 @@ export class VideoItem extends Component {
         // https://img.youtube.com/vi/A2FsgKoGD04/mqdefault.jpg // without black stripes
 
         return (
-            <div style={{position: 'relative', margin: '20px'}}>
+            <div className="m-2" style={{position: 'relative'}}>
                 <img 
                     src={`https://img.youtube.com/vi/${id}/mqdefault.jpg`}
                     height={'94px'}
                     width={'168px'}
                  />
-                 <p style={{display: 'inline', position: 'absolute', top: '0', marginLeft: '8px'}}>{title}</p>
+                 <p className="text-bolder ml-2 d-inline text-" style={titleStyle}>{title}</p>
                  
             </div>
         )
@@ -37,3 +37,11 @@ export class VideoItem extends Component {
 }
 
 export default VideoItem
+
+const titleStyle = {
+    display: 'inline',
+    position: 'absolute',
+    top: '0',
+    fontSize: '.9rem',
+    fontWeight: 'bold'
+}

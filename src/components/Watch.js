@@ -9,20 +9,17 @@ export class Watch extends Component {
         video: []
     }
 
-   
-
     render() {
         const videos = this.props.videos.items ? this.props.videos.items : [];
-        const videoId = videos.length > 0 ? videos[0].id.videoId : 'qlzVPauUgw8';
+        const videoId = videos.length > 0 ? videos[0].id.videoId : '2e9diL0xTN4';
         const videoDetails = videos.length > 0 ? videos[0].snippet : 'emtpy'
 
-        console.log('vidoeId', this.props.videos.items ? this.props.videos.items[0].id.videoId : 'empty');
-        console.log('details', videoDetails);
         return (
             <div className="container-fluid">
                 <div className="row">
-                    <div className="col-8">
+                    <div className="col-7 mr-5">
                         <iframe
+                            frameBorder='0'
                             title={videoId}
                             allowFullScreen
                             width="800px"
@@ -30,14 +27,12 @@ export class Watch extends Component {
                             src={`https://www.youtube.com/embed/${videoId}`}
                         >
                         </iframe>
+                        <div> 
+                            <VideoDetails details={videoDetails} />
+                        </div>
                     </div>
-                    <div className="col-3">
+                    <div className="col-4 ml-5">
                         <SuggestedVideosList videoId={videoId} />
-                    </div>
-                </div>
-                <div className="row">
-                    <div className="col-7">
-                        <VideoDetails details={videoDetails} />
                     </div>
                 </div>
             </div>
