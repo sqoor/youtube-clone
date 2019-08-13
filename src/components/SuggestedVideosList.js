@@ -418,7 +418,7 @@ export class SuggestedVideosList extends Component {
         console.log('videoId: suggested video', this.props.videoId)
 
         return (
-            <div style={{ border: '1px solid red' }}>
+            <div style={{ border: '0px solid red' }}>
                 <p>
                     Up next
                     <form class="form-inline range-field d-inline  float-right">

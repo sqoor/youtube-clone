@@ -29,7 +29,7 @@ export class SearchBar extends Component {
                     </li>
                     <li className="nav-item mx-auto ml-1">
                         <form className="form-inline" onSubmit={this.submit}>
-                            <div class="input-group" style={{ height: '10px', width: '550px' }}>
+                            <div className="input-group" style={{ height: '10px', width: '550px' }}>
                                 <input
                                     className="form-control"
                                     ref={elem => this.searchInput = elem}
@@ -37,7 +37,7 @@ export class SearchBar extends Component {
                                     type="search"
                                     placeholder="Search"
                                 />
-                                <div class="input-group-append">
+                                <div className="input-group-append">
                                     <button className="px-4 py-0 btn btn-light text-secondary border" style={{ background: 'greylight' }}>
                                         <FontAwesomeIcon icon={faSearch} />
                                     </button>
