@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBars, faSearch } from '@fortawesome/free-solid-svg-icons';
+import { faBars, faSearch, faVideo, faEllipsisV, faTh, faShareSquare, faUserCircle } from '@fortawesome/free-solid-svg-icons';
 import { faYoutube } from '@fortawesome/free-brands-svg-icons';
 
 
@@ -21,18 +21,15 @@ export class SearchBar extends Component {
                         <FontAwesomeIcon icon={faBars} size="2x" />
                     </li>
                     <li className="nav-item" style={{ color: 'red' }}>
-                        <sup style={{ marginTop: '-10px' }} className="text-muted">JO</sup>
                         <FontAwesomeIcon icon={faYoutube} size="2x" />
-                        <span className="mb-5 text-dark font-weight-bolder">YouTube</span>
+                        <span className="mb-5 text-dark font-weight-bolder">
+                            <span>YouTube</span>
+                            <sup className="text-muted">JO</sup>
+                        </span>
                     </li>
                     <li className="nav-item mx-auto ml-1">
                         <form className="form-inline" onSubmit={this.submit}>
-                            <div class="input-group" style={{height: '10px', width: '550px'}}>
-                            <div class="input-group-append">
-                                    <button className="px-4 py-0 btn btn-secondary" style={{background: 'greylight'}}>
-                                        <FontAwesomeIcon icon={faSearch} />
-                                    </button>
-                                </div>
+                            <div class="input-group" style={{ height: '10px', width: '550px' }}>
                                 <input
                                     className="form-control"
                                     ref={elem => this.searchInput = elem}
@@ -40,14 +37,31 @@ export class SearchBar extends Component {
                                     type="search"
                                     placeholder="Search"
                                 />
+                                <div class="input-group-append">
+                                    <button className="px-4 py-0 btn btn-light text-secondary border" style={{ background: 'greylight' }}>
+                                        <FontAwesomeIcon icon={faSearch} />
+                                    </button>
+                                </div>
                             </div>
                         </form>
                     </li>
-                    <li className="nav-item">
+                    <li className="nav-item mx-3 pt-2 text-secondary">
+                        <FontAwesomeIcon icon={faVideo} />
                     </li>
-                    <li className="nav-item">
+                    <li className="nav-item mx-2 pt-2 text-secondary">
+                        <FontAwesomeIcon icon={faTh} />
                     </li>
-                    <li className="nav-item">
+                    <li className="nav-item mx-3 pt-2 text-secondary">
+                        <FontAwesomeIcon icon={faShareSquare} />
+                    </li>
+                    <li className="nav-item mx-2 ml-3 pt-2 text-secondary">
+                        <FontAwesomeIcon icon={faEllipsisV} />
+                    </li>
+                    <li className="nav-item mx-3 text-secondary">
+                        <div className="btn btn-outline-primary">
+                            <FontAwesomeIcon icon={faUserCircle} />
+                            {' '} SIGN IN
+                        </div>
                     </li>
                 </ul>
             </header>

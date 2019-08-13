@@ -413,18 +413,27 @@ export class SuggestedVideosList extends Component {
     //         });
     // }
 
+    
     render() {
         console.log('videoId: suggested video', this.props.videoId)
 
         return (
             <div style={{ border: '1px solid red' }}>
-                <p>Up next</p>
+                <p>
+                    Up next
+                    <form class="form-inline range-field d-inline  float-right">
+                        <label className="text-muted font-weight-bold " htmlFor="auto-play">
+                            <small>AUTOPLAY &nbsp;</small>
+                            <input style={{width: '30px'}} id="auto-play" type="range" class="custom-range" min="0" max="1" />    
+                        </label>
+                    </form>
+                </p>
                 {this.state.suggestedVideos.map((v, i) => {
-                    if(i === 0)
-                       return (<> 
-                                <VideoItem key={i} info={v} />
-                                <hr /> 
-                            </>);
+                    if (i === 0)
+                        return (<>
+                            <VideoItem key={i} info={v} />
+                            <hr />
+                        </>);
 
                     return <VideoItem key={i} info={v} />
                 })}

@@ -6,6 +6,7 @@ export class VideoDetails extends Component {
         return (
             <div style={{border: '1px solid red'}}>
                 {this.props.details.description}
+                
             </div>
         )
     }
