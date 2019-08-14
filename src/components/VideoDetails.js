@@ -1,7 +1,11 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 import abbrivate from 'number-abbreviate';
 
+
 export class VideoDetails extends Component {
+
+    /*
     // get subscribers count of channel and the thumbnail of the channel
     // https://www.googleapis.com/youtube/v3/channels?part=snippet,statistics&id=UCcN-NDV03eHs6oLd1pe2r8w&fields=items(snippet(thumbnails(default(url))),statistics(subscriberCount))&key=AIzaSyAjjdmj2OBbjr096PFMex2hs54gJSJSHhM
 
@@ -23,20 +27,43 @@ export class VideoDetails extends Component {
     //     ]
     // }
 
+    */
 
-    getPublishedAt() {
+
+    componentDidMount() {
+        console.log('mount', this.props);
+    }
+
+    youtubeAPICall = () => {
+        axios.get('https://www.googleapis.com/youtube/v3/channels', {
+            params: {
+                part: "snippet,statistics",
+                id: "UCcN-NDV03eHs6oLd1pe2r8w",
+                key: "AIzaSyAjjdmj2OBbjr096PFMex2hs54gJSJSHhM",
+                fields: "items(snippet(thumbnails(default(url))),statistics(subscriberCount))"
+            }
+        })
+            .then(res => {
+                console.log('youtube api', res.data.items);
+                return res.data;
+            })
+            .catch(err => console.log(err));
+    }
+
+
+    getPublishedAt = () => {
         const options = { year: 'numeric', month: 'short', day: 'numeric' };
         return new Date(this.props.details.publishedAt).toLocaleDateString("en-US", options)
     }
 
-    getDescription() {
+    getDescription = () => {
         let description = this.props.details.description
         description = description.split('\n');
 
         return description.length > 1 ? description[0] : description;
     }
 
-    getIsDescriptionNotLong() {
+    getIsDescriptionNotLong = () => {
         let description = this.props.details.description
         description = description.split('\n');
 
@@ -55,27 +82,20 @@ export class VideoDetails extends Component {
     }
 
     getChannelDetails() {
-        const youtubeAPI = {
-            "items": [
-                {
-                    "snippet": {
-                        "thumbnails": {
-                            "default": {
-                                "url": "https://yt3.ggpht.com/a/AGF-l79VPeDUmOS-auFj9O004tGgKszXguIG9TY-iQ=s88-c-k-c0xffffffff-no-rj-mo"
-                            }
-                        }
-                    },
-                    "statistics": {
-                        "subscriberCount": "2399839"
-                    }
-                }
-            ]
-        };
+        try {
+            const youtubeAPI = this.youtubeAPICall();
+            const thumbnail = youtubeAPI.items[0].snippet.thumbnails.default.url;
+            const subscriberCount = abbrivate(youtubeAPI.items[0].statistics.subscriberCount, 1);
+            console.log('thum & subCount', thumbnail, subscriberCount)
+            return { thumbnail, subscriberCount };
+        }
+        catch {
+            const thumbnail = 'ERROR';
+            const subscriberCount = 'ERROR'
+            console.log('error')
+            return  [thumbnail, subscriberCount]
+        }
 
-        const thumbnail = youtubeAPI.items[0].snippet.thumbnails.default.url;
-        const subscriberCount = abbrivate(youtubeAPI.items[0].statistics.subscriberCount, 1);
-
-        return { thumbnail, subscriberCount };
     }
 
     render() {
@@ -87,6 +107,7 @@ export class VideoDetails extends Component {
                     <div>
                         <img
                             style={imgStyle}
+                            alt=""
                             src={channelId ? this.getChannelDetails().thumbnail : ''}
                         />
                     </div>
@@ -101,7 +122,7 @@ export class VideoDetails extends Component {
                             <div>
                                 {description ? this.getDescription() : ''}
                             </div>
-                            <a className="text-muted d-block mt-5">
+                            <p className="text-muted d-block mt-5">
                                 <small
                                     onClick={this.toggleFullDescription}
                                     style={{ cursor: 'pointer' }}
@@ -109,11 +130,13 @@ export class VideoDetails extends Component {
                                 >
                                     SHOW MORE
                                 </small>
-                            </a>
+                            </p>
                         </div>
                     </div>
                     <div>
-                        <button style={buttonStyle}>SUBSCRIBE {channelId ? this.getChannelDetails().subscriberCount : ''}</button>
+                        <button style={buttonStyle}>
+                            SUBSCRIBE {channelId ? this.getChannelDetails() : ''}
+                        </button>
                     </div>
                 </div>
                 <hr />

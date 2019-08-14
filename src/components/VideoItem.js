@@ -28,11 +28,11 @@ export class VideoItem extends Component {
         const {
             id,
             title,
-            channelId,
+            // channelId,
             channelTitle,
-            description,
-            publishedAt,
-            thumbnails,
+            // description,
+            // publishedAt,
+            // thumbnails,
         } = this.props.info;
         
 
@@ -43,6 +43,7 @@ export class VideoItem extends Component {
                     <img
                         style={thumbnailImgStyle}
                         src={`https://img.youtube.com/vi/${id}/mqdefault.jpg`}
+                        alt=""
                         height={'94px'}
                         width={'168px'}
                     />

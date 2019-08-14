@@ -5,11 +5,12 @@ import abbreviate from 'number-abbreviate';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faThumbsUp, faThumbsDown, faShare, faEllipsisH, faBars } from '@fortawesome/free-solid-svg-icons';
 
-import SuggestedVideosList from './SuggestedVideosList';
+// import SuggestedVideosList from './SuggestedVideosList';
 import VideoDetails from './VideoDetails';
 
 export class Watch extends Component {
 
+    /*
     // you api call should only request title, views, likes dislikes
     // youtube api how to retive only certain fields only.
     // we need channelId channelTitle publishedAt and description to be passed to the details component
@@ -19,24 +20,26 @@ export class Watch extends Component {
     // https://www.googleapis.com/youtube/v3/videos?part=snippet,statistics&id=2e9diL0xTN4&fields=items(id, snippet(title, channelId, channelTitle, publishedAt, description),statistics(viewCount, likeCount, dislikeCount))&key=AIzaSyAjjdmj2OBbjr096PFMex2hs54gJSJSHhM
     // response
     // const youtubeAPI = {
-//     "items": [
-//         {
-//             "id": "2e9diL0xTN4",
-//             "snippet": {
-//                 "publishedAt": "2018-07-03T14:00:00.000Z",
-//                 "channelId": "UCcN-NDV03eHs6oLd1pe2r8w",
-//                 "title": "Khalid - OTW (Official Video) ft. 6LACK, Ty Dolla $ign",
-//                 "description": "Khalid feat. Ty Dolla $ign & 6LACK - OTW (Official Video) Out Now!  http://smarturl.it/XOTW\n \n \nFollow Khalid:\nhttps://www.facebook.com/thegreatkhalid\nhttps://twitter.com/thegreatkhalid\nhttps://www.instagram.com/thegr8khalid/\n \nFollow 6lack:\nhttps://www.facebook.com/6LACK/\nhttps://twitter.com/6LACK\nhttps://www.instagram.com/6lack/\n \nFollow Ty Dolla $ign:\nhttps://www.facebook.com/tydollasign/\nhttps://twitter.com/tydollasign\nhttps://www.instagram.com/tydollasign/",
-//                 "channelTitle": "KhalidVEVO"
-//             },
-//             "statistics": {
-//                 "viewCount": "108605498",
-//                 "likeCount": "706485",
-//                 "dislikeCount": "26505"
-//             }
-//         }
-//     ]
-// }
+    //     "items": [
+    //         {
+    //             "id": "2e9diL0xTN4",
+    //             "snippet": {
+    //                 "publishedAt": "2018-07-03T14:00:00.000Z",
+    //                 "channelId": "UCcN-NDV03eHs6oLd1pe2r8w",
+    //                 "title": "Khalid - OTW (Official Video) ft. 6LACK, Ty Dolla $ign",
+    //                 "description": "Khalid feat. Ty Dolla $ign & 6LACK - OTW (Official Video) Out Now!  http://smarturl.it/XOTW\n \n \nFollow Khalid:\nhttps://www.facebook.com/thegreatkhalid\nhttps://twitter.com/thegreatkhalid\nhttps://www.instagram.com/thegr8khalid/\n \nFollow 6lack:\nhttps://www.facebook.com/6LACK/\nhttps://twitter.com/6LACK\nhttps://www.instagram.com/6lack/\n \nFollow Ty Dolla $ign:\nhttps://www.facebook.com/tydollasign/\nhttps://twitter.com/tydollasign\nhttps://www.instagram.com/tydollasign/",
+    //                 "channelTitle": "KhalidVEVO"
+    //             },
+    //             "statistics": {
+    //                 "viewCount": "108605498",
+    //                 "likeCount": "706485",
+    //                 "dislikeCount": "26505"
+    //             }
+    //         }
+    //     ]
+    // }
+
+    */
 
     state = {
         video: {
@@ -48,27 +51,23 @@ export class Watch extends Component {
         }
     }
 
-    componentDidMount() {
-        const youtubeAPI = {
-            "items": [
-                {
-                    "id": "2e9diL0xTN4",
-                    "snippet": {
-                        "publishedAt": "2018-07-03T14:00:00.000Z",
-                        "channelId": "UCcN-NDV03eHs6oLd1pe2r8w",
-                        "title": "Khalid - OTW (Official Video) ft. 6LACK, Ty Dolla $ign",
-                        "description": "Khalid feat. Ty Dolla $ign & 6LACK - OTW (Official Video) Out Now!  http://smarturl.it/XOTW\n \n \nFollow Khalid:\nhttps://www.facebook.com/thegreatkhalid\nhttps://twitter.com/thegreatkhalid\nhttps://www.instagram.com/thegr8khalid/\n \nFollow 6lack:\nhttps://www.facebook.com/6LACK/\nhttps://twitter.com/6LACK\nhttps://www.instagram.com/6lack/\n \nFollow Ty Dolla $ign:\nhttps://www.facebook.com/tydollasign/\nhttps://twitter.com/tydollasign\nhttps://www.instagram.com/tydollasign/",
-                        // "description": " asfaf",
-                        "channelTitle": "KhalidVEVO"
-                    },
-                    "statistics": {
-                        "viewCount": "108605498",
-                        "likeCount": "706485",
-                        "dislikeCount": "26505"
-                    }
-                }
-            ]
-        }
+    async youtubeAPICall() {
+        const response = await axios.get('https://www.googleapis.com/youtube/v3/videos', {
+            params: {
+                part: "snippet,statistics",
+                // id: "2e9diL0xTN4",
+                // id: "WC7H6-U7T34",
+                id: "kiPwc_nPHYo",
+                key: "AIzaSyAjjdmj2OBbjr096PFMex2hs54gJSJSHhM",
+                fields: "items(id, snippet(title, channelId, channelTitle, publishedAt, description),statistics(viewCount, likeCount, dislikeCount))"
+            }
+        });
+
+        return response.data;
+    }
+
+    async componentDidMount() {
+        let youtubeAPI = await this.youtubeAPICall();
 
         this.setState({
             video: {
@@ -116,7 +115,7 @@ export class Watch extends Component {
                         </div>
                         <hr />
                         <div>
-                            <VideoDetails details={{description, publishedAt, channelId, channelTitle}} />
+                            {channelId ? <VideoDetails details={{ description, publishedAt, channelId, channelTitle }} /> : ''}
                         </div>
                     </div>
                     <div className="col-4 ml-5">
@@ -136,3 +135,8 @@ const iconsStyle = {
     fontSize: '.9rem',
     color: '#6c757dc2 !important'
 }
+
+
+
+/// bugs text note wraping in details 
+/// subsrice numbers error
