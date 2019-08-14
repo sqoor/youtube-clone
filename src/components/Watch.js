@@ -1,58 +1,92 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 import commaNumber from 'comma-number';
 import abbreviate from 'number-abbreviate';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faThumbsUp, faThumbsDown, faShare, faEllipsisH, faBars } from '@fortawesome/free-solid-svg-icons';
-// import axios from 'axios';
 
 import SuggestedVideosList from './SuggestedVideosList';
 import VideoDetails from './VideoDetails';
 
 export class Watch extends Component {
-    
-// you api call should only request title, views, likes dislikes
-// youtube api how to retive only certain fields only.
 
-// request:
-//https://www.googleapis.com/youtube/v3/videos?part=snippet,statistics&id=2e9diL0xTN4&fields=items(snippet(title),statistics(viewCount, likeCount, dislikeCount))&key=AIzaSyAjjdmj2OBbjr096PFMex2hs54gJSJSHhM
-//https://www.googleapis.com/youtube/v3/videos?part=snippet,statistics&id=2e9diL0xTN4&fields=items(id, snippet(title),statistics(viewCount, likeCount, dislikeCount))&key=AIzaSyAjjdmj2OBbjr096PFMex2hs54gJSJSHhM
-// response
-// {
-//     
+    // you api call should only request title, views, likes dislikes
+    // youtube api how to retive only certain fields only.
+    // we need channelId channelTitle publishedAt and description to be passed to the details component
+    // request:
+    //https://www.googleapis.com/youtube/v3/videos?part=snippet,statistics&id=2e9diL0xTN4&fields=items(snippet(title),statistics(viewCount, likeCount, dislikeCount))&key=AIzaSyAjjdmj2OBbjr096PFMex2hs54gJSJSHhM
+    //https://www.googleapis.com/youtube/v3/videos?part=snippet,statistics&id=2e9diL0xTN4&fields=items(id, snippet(title),statistics(viewCount, likeCount, dislikeCount))&key=AIzaSyAjjdmj2OBbjr096PFMex2hs54gJSJSHhM
+    // https://www.googleapis.com/youtube/v3/videos?part=snippet,statistics&id=2e9diL0xTN4&fields=items(id, snippet(title, channelId, channelTitle, publishedAt, description),statistics(viewCount, likeCount, dislikeCount))&key=AIzaSyAjjdmj2OBbjr096PFMex2hs54gJSJSHhM
+    // response
+    // const youtubeAPI = {
+//     "items": [
+//         {
+//             "id": "2e9diL0xTN4",
+//             "snippet": {
+//                 "publishedAt": "2018-07-03T14:00:00.000Z",
+//                 "channelId": "UCcN-NDV03eHs6oLd1pe2r8w",
+//                 "title": "Khalid - OTW (Official Video) ft. 6LACK, Ty Dolla $ign",
+//                 "description": "Khalid feat. Ty Dolla $ign & 6LACK - OTW (Official Video) Out Now!  http://smarturl.it/XOTW\n \n \nFollow Khalid:\nhttps://www.facebook.com/thegreatkhalid\nhttps://twitter.com/thegreatkhalid\nhttps://www.instagram.com/thegr8khalid/\n \nFollow 6lack:\nhttps://www.facebook.com/6LACK/\nhttps://twitter.com/6LACK\nhttps://www.instagram.com/6lack/\n \nFollow Ty Dolla $ign:\nhttps://www.facebook.com/tydollasign/\nhttps://twitter.com/tydollasign\nhttps://www.instagram.com/tydollasign/",
+//                 "channelTitle": "KhalidVEVO"
+//             },
+//             "statistics": {
+//                 "viewCount": "108605498",
+//                 "likeCount": "706485",
+//                 "dislikeCount": "26505"
+//             }
+//         }
+//     ]
 // }
 
-youtubeAPI = {
-    "items": [
-        {
-            "id": "2e9diL0xTN4",
-            "snippet": {
-                "title": "Khalid - OTW (Official Video) ft. 6LACK, Ty Dolla $ign"
-            },
-            "statistics": {
-                "viewCount": "108602718",
-                "likeCount": "706465",
-                "dislikeCount": "26502"
-            }
+    state = {
+        video: {
+            id: '',
+            title: '',
+            views: '',
+            likes: '',
+            dislikes: ''
         }
-    ]
-}
-
-state = {
-        video: {}
     }
-    
+
+    componentDidMount() {
+        const youtubeAPI = {
+            "items": [
+                {
+                    "id": "2e9diL0xTN4",
+                    "snippet": {
+                        "publishedAt": "2018-07-03T14:00:00.000Z",
+                        "channelId": "UCcN-NDV03eHs6oLd1pe2r8w",
+                        "title": "Khalid - OTW (Official Video) ft. 6LACK, Ty Dolla $ign",
+                        "description": "Khalid feat. Ty Dolla $ign & 6LACK - OTW (Official Video) Out Now!  http://smarturl.it/XOTW\n \n \nFollow Khalid:\nhttps://www.facebook.com/thegreatkhalid\nhttps://twitter.com/thegreatkhalid\nhttps://www.instagram.com/thegr8khalid/\n \nFollow 6lack:\nhttps://www.facebook.com/6LACK/\nhttps://twitter.com/6LACK\nhttps://www.instagram.com/6lack/\n \nFollow Ty Dolla $ign:\nhttps://www.facebook.com/tydollasign/\nhttps://twitter.com/tydollasign\nhttps://www.instagram.com/tydollasign/",
+                        // "description": " asfaf",
+                        "channelTitle": "KhalidVEVO"
+                    },
+                    "statistics": {
+                        "viewCount": "108605498",
+                        "likeCount": "706485",
+                        "dislikeCount": "26505"
+                    }
+                }
+            ]
+        }
+
+        this.setState({
+            video: {
+                id: youtubeAPI.items[0].id,
+                title: youtubeAPI.items[0].snippet.title,
+                description: youtubeAPI.items[0].snippet.description,
+                publishedAt: youtubeAPI.items[0].snippet.publishedAt,
+                channelId: youtubeAPI.items[0].snippet.channelId,
+                channelTitle: youtubeAPI.items[0].snippet.channelTitle,
+                views: commaNumber(youtubeAPI.items[0].statistics.viewCount),
+                likes: abbreviate(youtubeAPI.items[0].statistics.likeCount),
+                dislikes: abbreviate(youtubeAPI.items[0].statistics.dislikeCount)
+            }
+        });
+    }
+
     render() {
-        const videoId = this.youtubeAPI.items[0].id;
-        const title = this.youtubeAPI.items[0].snippet.title;
-        const views = commaNumber(this.youtubeAPI.items[0].statistics.viewCount);
-        const likes = abbreviate(this.youtubeAPI.items[0].statistics.likeCount);
-        const dislikes = abbreviate(this.youtubeAPI.items[0].statistics.dislikeCount);
-                
-        console.log('id', videoId);
-        console.log('title', title);
-        console.log('views', views);
-        console.log('likes', likes);
-        console.log('dislikes', dislikes);
+        const { id, title, views, likes, dislikes, description, publishedAt, channelId, channelTitle } = this.state.video;
 
         return (
             <div className="container-fluid">
@@ -60,11 +94,11 @@ state = {
                     <div className="col-7 pr-0">
                         <iframe
                             frameBorder='0'
-                            title={videoId}
+                            title={id}
                             allowFullScreen
                             width="800px"
                             height="500px"
-                            src={`https://www.youtube.com/embed/${videoId}`}
+                            src={`https://www.youtube.com/embed/${id}`}
                         >
                         </iframe>
                         <div className="mt-3">
@@ -82,7 +116,7 @@ state = {
                         </div>
                         <hr />
                         <div>
-                            {/* <VideoDetails details={videoDetails} /> */}
+                            <VideoDetails details={{description, publishedAt, channelId, channelTitle}} />
                         </div>
                     </div>
                     <div className="col-4 ml-5">
