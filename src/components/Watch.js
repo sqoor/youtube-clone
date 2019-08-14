@@ -52,6 +52,29 @@ export class Watch extends Component {
     }
 
     async youtubeAPICall() {
+
+        const youtubeAPI = {
+            "items": [
+                {
+                    "id": "2e9diL0xTN4",
+                    "snippet": {
+                        "publishedAt": "2018-07-03T14:00:00.000Z",
+                        "channelId": "UCcN-NDV03eHs6oLd1pe2r8w",
+                        "title": "Khalid - OTW (Official Video) ft. 6LACK, Ty Dolla $ign",
+                        "description": "Khalid feat. Ty Dolla $ign & 6LACK - OTW (Official Video) Out Now!  http://smarturl.it/XOTW\n \n \nFollow Khalid:\nhttps://www.facebook.com/thegreatkhalid\nhttps://twitter.com/thegreatkhalid\nhttps://www.instagram.com/thegr8khalid/\n \nFollow 6lack:\nhttps://www.facebook.com/6LACK/\nhttps://twitter.com/6LACK\nhttps://www.instagram.com/6lack/\n \nFollow Ty Dolla $ign:\nhttps://www.facebook.com/tydollasign/\nhttps://twitter.com/tydollasign\nhttps://www.instagram.com/tydollasign/",
+                        "channelTitle": "KhalidVEVO"
+                    },
+                    "statistics": {
+                        "viewCount": "108605498",
+                        "likeCount": "706485",
+                        "dislikeCount": "26505"
+                    }
+                }
+            ]
+        }
+
+        return youtubeAPI;
+
         const response = await axios.get('https://www.googleapis.com/youtube/v3/videos', {
             params: {
                 part: "snippet,statistics",
