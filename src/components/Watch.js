@@ -5,7 +5,7 @@ import abbreviate from 'number-abbreviate';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faThumbsUp, faThumbsDown, faShare, faEllipsisH, faBars } from '@fortawesome/free-solid-svg-icons';
 
-// import SuggestedVideosList from './SuggestedVideosList';
+import SuggestedVideosList from './SuggestedVideosList';
 import VideoDetails from './VideoDetails';
 
 export class Watch extends Component {
@@ -105,10 +105,22 @@ export class Watch extends Component {
                 dislikes: abbreviate(youtubeAPI.items[0].statistics.dislikeCount)
             }
         });
+
+        window.document.title = this.state.video.title;
     }
 
     render() {
-        const { id, title, views, likes, dislikes, description, publishedAt, channelId, channelTitle } = this.state.video;
+        const {
+            id,
+            title,
+            views,
+            likes,
+            dislikes,
+            description,
+            publishedAt,
+            channelId,
+            channelTitle
+        } = this.state.video;
 
         return (
             <div className="container-fluid">
@@ -138,11 +150,11 @@ export class Watch extends Component {
                         </div>
                         <hr />
                         <div>
-                            {channelId ? <VideoDetails details={{ description, publishedAt, channelId, channelTitle }} /> : ''}
+                            {/* {channelId ? <VideoDetails details={{ description, publishedAt, channelId, channelTitle }} /> : ''} */}
                         </div>
                     </div>
                     <div className="col-4 ml-5">
-                        {/* <SuggestedVideosList videoId={videoId} /> */}
+                        {id ?  <SuggestedVideosList videoId={id} /> : ''}
                     </div>
                 </div>
             </div>
@@ -158,8 +170,3 @@ const iconsStyle = {
     fontSize: '.9rem',
     color: '#6c757dc2 !important'
 }
-
-
-
-/// bugs text note wraping in details 
-/// subsrice numbers error

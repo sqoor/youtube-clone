@@ -1,441 +1,111 @@
 import React, { Component } from 'react';
-// import axios from 'axios';
+import axios from 'axios';
 import VideoItem from './VideoItem';
 // import Watch from './Watch';
 
 export class SuggestedVideosList extends Component {
     state = {
-        suggestedVideos: [
-            {
-                id: '2e9diL0xTN4',
-                title: 'Khalid - OTW (Official Video) ft. 6LACK, Ty Dolla $ign',
-                channelId: 'UCcN-NDV03eHs6oLd1pe2r8w',
-                channelTitle: 'KhalidVEVO',
-                description: 'Khalid feat. Ty Dolla $ign & 6LACK - OTW (Official Video) Out Now!  http://smarturl.it/XOTW\n \n \nFollow Khalid:\nhttps://www.facebook.com/thegreatkhalid\nhttps://twitter.com/thegreatkhalid\nhttps://www.instagram.com/thegr8khalid/\n \nFollow 6lack:\nhttps://www.facebook.com/6LACK/\nhttps://twitter.com/6LACK\nhttps://www.instagram.com/6lack/\n \nFollow Ty Dolla $ign:\nhttps://www.facebook.com/tydollasign/\nhttps://twitter.com/tydollasign\nhttps://www.instagram.com/tydollasign/',
-                publishedAt: '2018-07-03T14:00:00.000Z',
-                thumbnails: {
-                    "default": {
-                        "url": "https://i.ytimg.com/vi/2e9diL0xTN4/default.jpg",
-                        "width": 120,
-                        "height": 90
-                    },
-                    "medium": {
-                        "url": "https://i.ytimg.com/vi/2e9diL0xTN4/mqdefault.jpg",
-                        "width": 320,
-                        "height": 180
-                    },
-                    "high": {
-                        "url": "https://i.ytimg.com/vi/2e9diL0xTN4/hqdefault.jpg",
-                        "width": 480,
-                        "height": 360
-                    },
-                    "standard": {
-                        "url": "https://i.ytimg.com/vi/2e9diL0xTN4/sddefault.jpg",
-                        "width": 640,
-                        "height": 480
-                    },
-                    "maxres": {
-                        "url": "https://i.ytimg.com/vi/2e9diL0xTN4/maxresdefault.jpg",
-                        "width": 1280,
-                        "height": 720
-                    }
-                },
-                statistics: {
-                    viewCount: "108416393",
-                    likeCount: "705614",
-                    dislikeCount: "26465",
-                    favoriteCount: "0",
-                    commentCount: "14382"
-                },
-                contentDetails: {
-                    duration: "PT4M13S", //The time is formatted as an ISO 8601 string. PT stands for Time Duration, 4M is 4 minutes, and 13S is 13 seconds.
-                    dimension: "2d",
-                    definition: "hd",
-                    caption: "false",
-                    licensedContent: true
-                }
-            },
-            {
-                id: '8DvywoWv6fI',
-                title: "Python for Everybody - Full Course with Dr. Chuck",
-                channelId: 'UCcN-NDV03eHs6oLd1pe2r8w',
-                channelTitle: 'KhalidVEVO',
-                description: 'Khalid feat. Ty Dolla $ign & 6LACK - OTW (Official Video) Out Now!  http://smarturl.it/XOTW\n \n \nFollow Khalid:\nhttps://www.facebook.com/thegreatkhalid\nhttps://twitter.com/thegreatkhalid\nhttps://www.instagram.com/thegr8khalid/\n \nFollow 6lack:\nhttps://www.facebook.com/6LACK/\nhttps://twitter.com/6LACK\nhttps://www.instagram.com/6lack/\n \nFollow Ty Dolla $ign:\nhttps://www.facebook.com/tydollasign/\nhttps://twitter.com/tydollasign\nhttps://www.instagram.com/tydollasign/',
-                publishedAt: '2018-07-03T14:00:00.000Z',
-                thumbnails: {
-                    "default": {
-                        "url": "https://i.ytimg.com/vi/2e9diL0xTN4/default.jpg",
-                        "width": 120,
-                        "height": 90
-                    },
-                    "medium": {
-                        "url": "https://i.ytimg.com/vi/2e9diL0xTN4/mqdefault.jpg",
-                        "width": 320,
-                        "height": 180
-                    },
-                    "high": {
-                        "url": "https://i.ytimg.com/vi/2e9diL0xTN4/hqdefault.jpg",
-                        "width": 480,
-                        "height": 360
-                    },
-                    "standard": {
-                        "url": "https://i.ytimg.com/vi/2e9diL0xTN4/sddefault.jpg",
-                        "width": 640,
-                        "height": 480
-                    },
-                    "maxres": {
-                        "url": "https://i.ytimg.com/vi/2e9diL0xTN4/maxresdefault.jpg",
-                        "width": 1280,
-                        "height": 720
-                    }
-                },
-                statistics: {
-                    viewCount: 450177,
-                    likeCount: 18072,
-                    favoriteCount: 0,
-                    dislikeCount: 156,
-                    commentCount: 654
-                },
-                contentDetails: {
-                    duration: "PT13H40M10S", //The time is formatted as an ISO 8601 string. PT stands for Time Duration, 4M is 4 minutes, and 13S is 13 seconds.
-                    dimension: "2d",
-                    definition: "hd",
-                    caption: "false",
-                    licensedContent: true
-                }
-            },
-            {
-                id: '2e9diL0xTN4',
-                title: 'Khalid - OTW (Official Video) ft. 6LACK, Ty Dolla $ign',
-                channelId: 'UCcN-NDV03eHs6oLd1pe2r8w',
-                channelTitle: 'KhalidVEVO',
-                description: 'Khalid feat. Ty Dolla $ign & 6LACK - OTW (Official Video) Out Now!  http://smarturl.it/XOTW\n \n \nFollow Khalid:\nhttps://www.facebook.com/thegreatkhalid\nhttps://twitter.com/thegreatkhalid\nhttps://www.instagram.com/thegr8khalid/\n \nFollow 6lack:\nhttps://www.facebook.com/6LACK/\nhttps://twitter.com/6LACK\nhttps://www.instagram.com/6lack/\n \nFollow Ty Dolla $ign:\nhttps://www.facebook.com/tydollasign/\nhttps://twitter.com/tydollasign\nhttps://www.instagram.com/tydollasign/',
-                publishedAt: '2018-07-03T14:00:00.000Z',
-                thumbnails: {
-                    "default": {
-                        "url": "https://i.ytimg.com/vi/2e9diL0xTN4/default.jpg",
-                        "width": 120,
-                        "height": 90
-                    },
-                    "medium": {
-                        "url": "https://i.ytimg.com/vi/2e9diL0xTN4/mqdefault.jpg",
-                        "width": 320,
-                        "height": 180
-                    },
-                    "high": {
-                        "url": "https://i.ytimg.com/vi/2e9diL0xTN4/hqdefault.jpg",
-                        "width": 480,
-                        "height": 360
-                    },
-                    "standard": {
-                        "url": "https://i.ytimg.com/vi/2e9diL0xTN4/sddefault.jpg",
-                        "width": 640,
-                        "height": 480
-                    },
-                    "maxres": {
-                        "url": "https://i.ytimg.com/vi/2e9diL0xTN4/maxresdefault.jpg",
-                        "width": 1280,
-                        "height": 720
-                    }
-                },
-                statistics: {
-                    viewCount: "108416393",
-                    likeCount: "705614",
-                    dislikeCount: "26465",
-                    favoriteCount: "0",
-                    commentCount: "14382"
-                },
-                contentDetails: {
-                    duration: "PT4M13S", //The time is formatted as an ISO 8601 string. PT stands for Time Duration, 4M is 4 minutes, and 13S is 13 seconds.
-                    dimension: "2d",
-                    definition: "hd",
-                    caption: "false",
-                    licensedContent: true
-                }
-            },
-            {
-                id: '2e9diL0xTN4',
-                title: 'Khalid - OTW (Official Video) ft. 6LACK, Ty Dolla $ign',
-                channelId: 'UCcN-NDV03eHs6oLd1pe2r8w',
-                channelTitle: 'KhalidVEVO',
-                description: 'Khalid feat. Ty Dolla $ign & 6LACK - OTW (Official Video) Out Now!  http://smarturl.it/XOTW\n \n \nFollow Khalid:\nhttps://www.facebook.com/thegreatkhalid\nhttps://twitter.com/thegreatkhalid\nhttps://www.instagram.com/thegr8khalid/\n \nFollow 6lack:\nhttps://www.facebook.com/6LACK/\nhttps://twitter.com/6LACK\nhttps://www.instagram.com/6lack/\n \nFollow Ty Dolla $ign:\nhttps://www.facebook.com/tydollasign/\nhttps://twitter.com/tydollasign\nhttps://www.instagram.com/tydollasign/',
-                publishedAt: '2018-07-03T14:00:00.000Z',
-                thumbnails: {
-                    "default": {
-                        "url": "https://i.ytimg.com/vi/2e9diL0xTN4/default.jpg",
-                        "width": 120,
-                        "height": 90
-                    },
-                    "medium": {
-                        "url": "https://i.ytimg.com/vi/2e9diL0xTN4/mqdefault.jpg",
-                        "width": 320,
-                        "height": 180
-                    },
-                    "high": {
-                        "url": "https://i.ytimg.com/vi/2e9diL0xTN4/hqdefault.jpg",
-                        "width": 480,
-                        "height": 360
-                    },
-                    "standard": {
-                        "url": "https://i.ytimg.com/vi/2e9diL0xTN4/sddefault.jpg",
-                        "width": 640,
-                        "height": 480
-                    },
-                    "maxres": {
-                        "url": "https://i.ytimg.com/vi/2e9diL0xTN4/maxresdefault.jpg",
-                        "width": 1280,
-                        "height": 720
-                    }
-                },
-                statistics: {
-                    viewCount: "108416393",
-                    likeCount: "705614",
-                    dislikeCount: "26465",
-                    favoriteCount: "0",
-                    commentCount: "14382"
-                },
-                contentDetails: {
-                    duration: "PT4M13S", //The time is formatted as an ISO 8601 string. PT stands for Time Duration, 4M is 4 minutes, and 13S is 13 seconds.
-                    dimension: "2d",
-                    definition: "hd",
-                    caption: "false",
-                    licensedContent: true
-                }
-            },
-            {
-                id: '2e9diL0xTN4',
-                title: 'Khalid - OTW (Official Video) ft. 6LACK, Ty Dolla $ign',
-                channelId: 'UCcN-NDV03eHs6oLd1pe2r8w',
-                channelTitle: 'KhalidVEVO',
-                description: 'Khalid feat. Ty Dolla $ign & 6LACK - OTW (Official Video) Out Now!  http://smarturl.it/XOTW\n \n \nFollow Khalid:\nhttps://www.facebook.com/thegreatkhalid\nhttps://twitter.com/thegreatkhalid\nhttps://www.instagram.com/thegr8khalid/\n \nFollow 6lack:\nhttps://www.facebook.com/6LACK/\nhttps://twitter.com/6LACK\nhttps://www.instagram.com/6lack/\n \nFollow Ty Dolla $ign:\nhttps://www.facebook.com/tydollasign/\nhttps://twitter.com/tydollasign\nhttps://www.instagram.com/tydollasign/',
-                publishedAt: '2018-07-03T14:00:00.000Z',
-                thumbnails: {
-                    "default": {
-                        "url": "https://i.ytimg.com/vi/2e9diL0xTN4/default.jpg",
-                        "width": 120,
-                        "height": 90
-                    },
-                    "medium": {
-                        "url": "https://i.ytimg.com/vi/2e9diL0xTN4/mqdefault.jpg",
-                        "width": 320,
-                        "height": 180
-                    },
-                    "high": {
-                        "url": "https://i.ytimg.com/vi/2e9diL0xTN4/hqdefault.jpg",
-                        "width": 480,
-                        "height": 360
-                    },
-                    "standard": {
-                        "url": "https://i.ytimg.com/vi/2e9diL0xTN4/sddefault.jpg",
-                        "width": 640,
-                        "height": 480
-                    },
-                    "maxres": {
-                        "url": "https://i.ytimg.com/vi/2e9diL0xTN4/maxresdefault.jpg",
-                        "width": 1280,
-                        "height": 720
-                    }
-                },
-                statistics: {
-                    viewCount: "108416393",
-                    likeCount: "705614",
-                    dislikeCount: "26465",
-                    favoriteCount: "0",
-                    commentCount: "14382"
-                },
-                contentDetails: {
-                    duration: "PT4M13S", //The time is formatted as an ISO 8601 string. PT stands for Time Duration, 4M is 4 minutes, and 13S is 13 seconds.
-                    dimension: "2d",
-                    definition: "hd",
-                    caption: "false",
-                    licensedContent: true
-                }
-            },
-            {
-                id: '2e9diL0xTN4',
-                title: 'Khalid - OTW (Official Video) ft. 6LACK, Ty Dolla $ign',
-                channelId: 'UCcN-NDV03eHs6oLd1pe2r8w',
-                channelTitle: 'KhalidVEVO',
-                description: 'Khalid feat. Ty Dolla $ign & 6LACK - OTW (Official Video) Out Now!  http://smarturl.it/XOTW\n \n \nFollow Khalid:\nhttps://www.facebook.com/thegreatkhalid\nhttps://twitter.com/thegreatkhalid\nhttps://www.instagram.com/thegr8khalid/\n \nFollow 6lack:\nhttps://www.facebook.com/6LACK/\nhttps://twitter.com/6LACK\nhttps://www.instagram.com/6lack/\n \nFollow Ty Dolla $ign:\nhttps://www.facebook.com/tydollasign/\nhttps://twitter.com/tydollasign\nhttps://www.instagram.com/tydollasign/',
-                publishedAt: '2018-07-03T14:00:00.000Z',
-                thumbnails: {
-                    "default": {
-                        "url": "https://i.ytimg.com/vi/2e9diL0xTN4/default.jpg",
-                        "width": 120,
-                        "height": 90
-                    },
-                    "medium": {
-                        "url": "https://i.ytimg.com/vi/2e9diL0xTN4/mqdefault.jpg",
-                        "width": 320,
-                        "height": 180
-                    },
-                    "high": {
-                        "url": "https://i.ytimg.com/vi/2e9diL0xTN4/hqdefault.jpg",
-                        "width": 480,
-                        "height": 360
-                    },
-                    "standard": {
-                        "url": "https://i.ytimg.com/vi/2e9diL0xTN4/sddefault.jpg",
-                        "width": 640,
-                        "height": 480
-                    },
-                    "maxres": {
-                        "url": "https://i.ytimg.com/vi/2e9diL0xTN4/maxresdefault.jpg",
-                        "width": 1280,
-                        "height": 720
-                    }
-                },
-                statistics: {
-                    viewCount: "108416393",
-                    likeCount: "705614",
-                    dislikeCount: "26465",
-                    favoriteCount: "0",
-                    commentCount: "14382"
-                },
-                contentDetails: {
-                    duration: "PT4M13S", //The time is formatted as an ISO 8601 string. PT stands for Time Duration, 4M is 4 minutes, and 13S is 13 seconds.
-                    dimension: "2d",
-                    definition: "hd",
-                    caption: "false",
-                    licensedContent: true
-                }
-            },
-            {
-                id: '2e9diL0xTN4',
-                title: 'Khalid - OTW (Official Video) ft. 6LACK, Ty Dolla $ign',
-                channelId: 'UCcN-NDV03eHs6oLd1pe2r8w',
-                channelTitle: 'KhalidVEVO',
-                description: 'Khalid feat. Ty Dolla $ign & 6LACK - OTW (Official Video) Out Now!  http://smarturl.it/XOTW\n \n \nFollow Khalid:\nhttps://www.facebook.com/thegreatkhalid\nhttps://twitter.com/thegreatkhalid\nhttps://www.instagram.com/thegr8khalid/\n \nFollow 6lack:\nhttps://www.facebook.com/6LACK/\nhttps://twitter.com/6LACK\nhttps://www.instagram.com/6lack/\n \nFollow Ty Dolla $ign:\nhttps://www.facebook.com/tydollasign/\nhttps://twitter.com/tydollasign\nhttps://www.instagram.com/tydollasign/',
-                publishedAt: '2018-07-03T14:00:00.000Z',
-                thumbnails: {
-                    "default": {
-                        "url": "https://i.ytimg.com/vi/2e9diL0xTN4/default.jpg",
-                        "width": 120,
-                        "height": 90
-                    },
-                    "medium": {
-                        "url": "https://i.ytimg.com/vi/2e9diL0xTN4/mqdefault.jpg",
-                        "width": 320,
-                        "height": 180
-                    },
-                    "high": {
-                        "url": "https://i.ytimg.com/vi/2e9diL0xTN4/hqdefault.jpg",
-                        "width": 480,
-                        "height": 360
-                    },
-                    "standard": {
-                        "url": "https://i.ytimg.com/vi/2e9diL0xTN4/sddefault.jpg",
-                        "width": 640,
-                        "height": 480
-                    },
-                    "maxres": {
-                        "url": "https://i.ytimg.com/vi/2e9diL0xTN4/maxresdefault.jpg",
-                        "width": 1280,
-                        "height": 720
-                    }
-                },
-                statistics: {
-                    viewCount: "108416393",
-                    likeCount: "705614",
-                    dislikeCount: "26465",
-                    favoriteCount: "0",
-                    commentCount: "14382"
-                },
-                contentDetails: {
-                    duration: "PT4M13S", //The time is formatted as an ISO 8601 string. PT stands for Time Duration, 4M is 4 minutes, and 13S is 13 seconds.
-                    dimension: "2d",
-                    definition: "hd",
-                    caption: "false",
-                    licensedContent: true
-                }
-            }
-        ]
+        suggestedVideos: []
     }
 
-    // componentDidUpdate() {
-    //     axios.get('https://www.googleapis.com/youtube/v3/search', {
-    //         params: {
-    //             part: 'snippet',
-    //             type: 'video',
-    //             relatedToVideoId: this.props.videoId,
-    //             key: 'AIzaSyAjjdmj2OBbjr096PFMex2hs54gJSJSHhM'
-    //         }
-    //     })
-    //         .then(response => {
-    //             console.log('response:', response);
-    //             this.setState({
-    //                 suggestedVideos: response.data.items.map(v => {
-    //                     return {
-    //                         id: v.id.videoId,
-    //                         title: v.snippet.title,
-    //                         channelId: v.snippet.channelId,
-    //                         channelTitle: v.snippet.channelTitle,
-    //                         description: v.snippet.description,
-    //                         publishedAt: v.snippet.publishedAt,
-    //                         thumbnails: v.snippet.thumbnails,
-    //                     }
-    //                 })
-    //             });
-    //         })
-    //         .catch(error => {
-    //             console.log(error);
-    //             // throw new Error(error);
-    //         });
-    // }
-    // componentDidMount(whatSearchFor) {
-    //     axios.get('https://www.googleapis.com/youtube/v3/search', {
-    //         params: {
-    //             part: 'snippet',
-    //             type: 'video',
-    //             relatedToVideoId: this.props.videoId,
-    //             key: 'AIzaSyAjjdmj2OBbjr096PFMex2hs54gJSJSHhM'
-    //         }
-    //     })
-    //         .then(response => {
-    //             console.log('response:', response);
-    //             this.setState({
-    //                 suggestedVideos: response.data.items.map(v => {
-    //                     return {
-    //                         id: v.id.videoId,
-    //                         title: v.snippet.title,
-    //                         channelId: v.snippet.channelId,
-    //                         channelTitle: v.snippet.channelTitle,
-    //                         description: v.snippet.description,
-    //                         publishedAt: v.snippet.publishedAt,
-    //                         thumbnails: v.snippet.thumbnails,
-    //                     }
-    //                 })
-    //             });
-    //         })
-    //         .catch(error => {
-    //             console.log(error);
-    //             // throw new Error(error);
-    //         });
-    // }
+    async youtubeAPICall() {
 
+        const res = {
+            "items": [
+                {
+                    "id": {
+                        "videoId": "by3yRdlQvzs"
+                    }
+                },
+                {
+                    "id": {
+                        "videoId": "2zn4dAuZ2RU"
+                    }
+                },
+                {
+                    "id": {
+                        "videoId": "9bgap3QMwSo"
+                    }
+                },
+                {
+                    "id": {
+                        "videoId": "UdLQwzofhMo"
+                    }
+                },
+                {
+                    "id": {
+                        "videoId": "Jqs5EaAaueA"
+                    }
+                },
+                {
+                    "id": {
+                        "videoId": "JfGD75vHWrU"
+                    }
+                },
+                {
+                    "id": {
+                        "videoId": "b9yJk4jP6-8"
+                    }
+                },
+                {
+                    "id": {
+                        "videoId": "mi9aLWGeYtk"
+                    }
+                },
+                {
+                    "id": {
+                        "videoId": "VPeWDg6B4sI"
+                    }
+                }
+            ]
+        }
+        
+
+        return res;
+
+
+        const response =  await axios.get('https://www.googleapis.com/youtube/v3/search', {
+            params: {
+                part: 'snippet',
+                type: 'video',
+                maxResults: '10',
+                relatedToVideoId: this.props.videoId,
+                key: 'AIzaSyAjjdmj2OBbjr096PFMex2hs54gJSJSHhM',
+                fields: 'items(id(videoId))'
+            }
+        });
+
+        return response.data;
+    }
+
+    async componentDidMount() {
+        const response = await this.youtubeAPICall();
+
+        this.setState({
+            suggestedVideos: response.items.map(v => v.id.videoId)
+        });
+    }
     
     render() {
-        console.log('videoId: suggested video', this.props.videoId)
-
         return (
             <div style={{ border: '0px solid red' }}>
-                <p>
+                <div>
                     Up next
-                    <form class="form-inline range-field d-inline  float-right">
+                    <form className="form-inline range-field d-inline  float-right">
                         <label className="text-muted font-weight-bold " htmlFor="auto-play">
                             <small>AUTOPLAY &nbsp;</small>
-                            <input style={{width: '30px'}} id="auto-play" type="range" class="custom-range" min="0" max="1" />    
+                            <input style={{width: '30px'}} id="auto-play" type="range" className="custom-range" min="0" max="1" />    
                         </label>
                     </form>
-                </p>
+                </div>
                 {this.state.suggestedVideos.map((v, i) => {
                     if (i === 0)
                         return (<>
-                            <VideoItem key={i} info={v} />
+                            <VideoItem key={i} id={v} />
                             <hr />
                         </>);
 
-                    return <VideoItem key={i} info={v} />
+                    return <VideoItem key={i  + 1} id={v} />
                 })}
             </div>
         )
