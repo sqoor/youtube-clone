@@ -63,6 +63,9 @@ export class VideoItem extends Component {
                 }
             ]
         }
+        setTimeout(function() {
+            console.log('timeout 1')
+        }, 10000000);
 
         return res.items[0];
 
@@ -113,6 +116,13 @@ export class VideoItem extends Component {
         });
     }
 
+    whileLoadingShowAnimation() {
+        let isLoading = this.state.video.title.length < 1;
+
+        if(isLoading) return <h1>Loading...</h1>
+     }
+
+
     render() {
         const {
             id,
@@ -124,6 +134,7 @@ export class VideoItem extends Component {
 
         return (
             <div className="my-3 container-fluid" style={{ position: 'relative' }}>
+                 {this.whileLoadingShowAnimation()}
                 <div className="row">
                     <div
                         onClick={this.openVideo}
@@ -194,26 +205,3 @@ const durationStyle = {
     gridColumn: '85/90',
     gridRow: '90/95'
 }
-
-
-// To Do:
-
-// routing in react
-// 1- click on video item open it on watch page - done 
-// 2- build search items pages 
-// 3- build homepage - popular videos - done
-
-
-// 4- build comments in watch page
-
-// not very important
-// 5- scroll down load more videos
-// 6- convert links in string into <a> elements
-// 7- fix the iframe of the watch component
-
-
-
-
-/// Bugs 
-// duration if was 0x ... eg. 01 | 02 | 09 it will shows 1 | 2 | 9
-// watch video autoplay, go to next video

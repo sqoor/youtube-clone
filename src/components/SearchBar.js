@@ -8,6 +8,13 @@ export class SearchBar extends Component {
     goHome = () => {
         window.location.href = '/';
     }
+    
+    goResult = (e) => {
+        e.preventDefault();
+
+        const searchQuery = this.searchInput.value;
+        window.location.href = `/results?search_query=${searchQuery}`;
+    }
 
     submit = (e) => {
         e.preventDefault();
@@ -32,7 +39,7 @@ export class SearchBar extends Component {
                         </span>
                     </li>
                     <li className="nav-item mx-auto ml-1">
-                        <form className="form-inline" onSubmit={this.submit}>
+                        <form className="form-inline" onSubmit={this.goResult}>
                             <div className="input-group" style={{ height: '10px', width: '550px' }}>
                                 <input
                                     className="form-control"

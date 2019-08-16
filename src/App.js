@@ -3,8 +3,9 @@ import {BrowserRouter, Route} from 'react-router-dom';
 import axios from 'axios';
 
 import Home from './components/Home';
-import Watch from './components/Watch';
 import SearchBar from './components/SearchBar';
+import Watch from './components/Watch';
+import Results from './components/Results';
 
 import './App.css';
 
@@ -42,7 +43,12 @@ class App extends Component {
           <Route 
             exact
             path="/watch" 
-            component={() => <Watch videos={this.state.videos} />} 
+            component={() => <Watch videos={this.state.videos} /*delete the prop, it's useless */ />} 
+          />
+           <Route 
+            exact
+            path="/results" 
+            component={() => <Results />} 
           />
         </BrowserRouter>
       </div>

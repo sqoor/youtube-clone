@@ -1,0 +1,30 @@
+// To Do:
+
+// routing in react
+1- click on video item open it on watch page                 - DONE 
+2- build search items pages 
+3- build homepage - popular videos                           - DO
+4- build comments in watch page
+
+not very important
+5- scroll down load more videos
+6- convert links in string into <a> elements
+7- fix the iframe of the watch component
+8- add animation - waiting when waiting for the api to render the data. set in center of page
+9- Add advanced filtering
+
+
+
+
+/// Bugs 
+duration if was 0x ... eg. 01 | 02 | 09 it will shows 1 | 2 | 9
+watch video autoplay, go to next video
+
+
+
+// loading spinner
+
+https://www.google.com/imgres?imgurl=https%3A%2F%2Fthumbs.gfycat.com%2FImprobablePertinentGraysquirrel-size_restricted.gif&imgrefurl=https%3A%2F%2Fgfycat.com%2Fimprobablepertinentgraysquirrel&docid=YRMKUsWGoycM4M&tbnid=PAD3ESIeSSuhJM%3A&vet=10ahUKEwjRs4D9hojkAhU3SRUIHRTFDY4QMwhzKCYwJg..i&w=362&h=362&bih=711&biw=1373&q=loading%20spinner%20gif&ved=0ahUKEwjRs4D9hojkAhU3SRUIHRTFDY4QMwhzKCYwJg&iact=mrc&uact=8
+https://www.google.com/imgres?imgurl=https%3A%2F%2Fthumbs.gfycat.com%2FImprobablePertinentGraysquirrel-size_restricted.gif&imgrefurl=https%3A%2F%2Fgfycat.com%2Fimprobablepertinentgraysquirrel&docid=YRMKUsWGoycM4M&tbnid=PAD3ESIeSSuhJM%3A&vet=10ahUKEwjRs4D9hojkAhU3SRUIHRTFDY4QMwhzKCYwJg..i&w=362&h=362&bih=711&biw=1373&q=loading%20spinner%20gif&ved=0ahUKEwjRs4D9hojkAhU3SRUIHRTFDY4QMwhzKCYwJg&iact=mrc&uact=8#h=362&imgdii=FHnhtuvCPM4jwM:&vet=10ahUKEwjRs4D9hojkAhU3SRUIHRTFDY4QMwhzKCYwJg..i&w=362
+https://www.google.com/imgres?imgurl=http%3A%2F%2Fepics.web.psi.ch%2Fsoftware%2Fcaqtdm%2FqtDir%2Fcaqtdmtest%2Fspinner.gif&imgrefurl=http%3A%2F%2Fepics.web.psi.ch%2Fsoftware%2Fcaqtdm%2FqtDir%2Fcaqtdmtest%2F&docid=no7UJgZshmfLoM&tbnid=i-wUcyAcNV2L3M%3A&vet=10ahUKEwjRs4D9hojkAhU3SRUIHRTFDY4QMwicAShPME8..i&w=400&h=400&bih=711&biw=1373&q=loading%20spinner%20gif&ved=0ahUKEwjRs4D9hojkAhU3SRUIHRTFDY4QMwicAShPME8&iact=mrc&uact=8
+https://www.google.com/imgres?imgurl=https%3A%2F%2Fthumbs.gfycat.com%2FImprobablePertinentGraysquirrel-size_restricted.gif&imgrefurl=https%3A%2F%2Fgfycat.com%2Fimprobablepertinentgraysquirrel&docid=YRMKUsWGoycM4M&tbnid=PAD3ESIeSSuhJM%3A&vet=10ahUKEwjRs4D9hojkAhU3SRUIHRTFDY4QMwhzKCYwJg..i&w=362&h=362&bih=711&biw=1373&q=loading%20spinner%20gif&ved=0ahUKEwjRs4D9hojkAhU3SRUIHRTFDY4QMwhzKCYwJg&iact=mrc&uact=8#h=362&imgdii=FHnhtuvCPM4jwM:&vet=10ahUKEwjRs4D9hojkAhU3SRUIHRTFDY4QMwhzKCYwJg..i&w=362
