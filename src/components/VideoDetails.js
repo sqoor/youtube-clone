@@ -87,7 +87,6 @@ export class VideoDetails extends Component {
                     }
                 ]
             }
-
             return responose;
             
         const response = await axios.get('https://www.googleapis.com/youtube/v3/channels', {

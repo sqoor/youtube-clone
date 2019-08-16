@@ -39,34 +39,38 @@ export class VideoItem extends Component {
             viewCount: '',
             channelId: '',
             channelTitle: '',
-        }
+        },
+        watchVideo: false
     }
 
     async youtubeAPICall() {
 
-        const res = {"items": [
-            {
-                "id": "2e9diL0xTN4",
-                "snippet": {
-                    "channelId": "UCcN-NDV03eHs6oLd1pe2r8w",
-                    "title": "Khalid - OTW (Official Video) ft. 6LACK, Ty Dolla $ign",
-                    "channelTitle": "KhalidVEVO"
-                },
-                "contentDetails": {
-                    "duration": "PT4M17S"
-                },
-                "statistics": {
-                    "viewCount": "108758288"
+        const res = {
+            "items": [
+                {
+                    "id": "2e9diL0xTN4",
+                    "snippet": {
+                        "channelId": "UCcN-NDV03eHs6oLd1pe2r8w",
+                        "title": "Khalid - OTW (Official Video) ft. 6LACK, Ty Dolla $ign",
+                        "channelTitle": "KhalidVEVO"
+                    },
+                    "contentDetails": {
+                        "duration": "PT4M17S"
+                    },
+                    "statistics": {
+                        "viewCount": "108758288"
+                    }
                 }
-            }
-        ]}
+            ]
+        }
 
         return res.items[0];
+
 
         const response = await axios.get('https://www.googleapis.com/youtube/v3/videos', {
             params: {
                 id: this.props.id,
-                part: 'statistics,contentDetails',
+                part: 'snippet,statistics,contentDetails',
                 key: 'AIzaSyAjjdmj2OBbjr096PFMex2hs54gJSJSHhM',
                 fields: 'items(id,snippet(title, channelId,channelTitle),statistics(viewCount),contentDetails(duration))'
             }
@@ -75,7 +79,7 @@ export class VideoItem extends Component {
     }
 
     formatDuration(duration) {
-        return  {
+        return {
             seconds: moment.duration(duration).seconds(),
             minutes: moment.duration(duration).minutes(),
             hours: moment.duration(duration).hours()
@@ -88,7 +92,7 @@ export class VideoItem extends Component {
 
     async componentDidMount() {
         const video = await this.youtubeAPICall();
-       
+
         this.setState({
             video: {
                 id: video.id,
@@ -102,11 +106,15 @@ export class VideoItem extends Component {
     }
 
     openVideo = () => {
-        console.log('open video clicked')
+        console.log(`got to /watch/${this.state.video.id}`)
+        window.location.href = `/watch?v=${this.state.video.id}`
+        this.setState({
+            watchVideo: true
+        });
     }
 
     render() {
-        const { 
+        const {
             id,
             title,
             duration,
@@ -118,32 +126,38 @@ export class VideoItem extends Component {
             <div className="my-3 container-fluid" style={{ position: 'relative' }}>
                 <div className="row">
                     <div
-                        onClick={this.openVideo}  
-                        className="thumbnail col-5 p-0"
+                        onClick={this.openVideo}
+                        className="thumbnail p-0"
                         style={thumbNailStyle}
                     >
-                        <img
-                            style={thumbnailImgStyle}
-                            src={`https://img.youtube.com/vi/${id}/mqdefault.jpg`}
-                            alt=""
-                        />
-                        
-                        {duration ?
-                            <span className="duration-badge badge badge-dark" style={durationStyle}>
-                                {duration.hours <= 0 ? '' : duration.hours + ':'}
-                                {duration.minutes <= 0 ? '' : duration.minutes + ':'}
-                                {duration.seconds <= 0 ? '00' : duration.seconds}
-                            </span>
-                        : ''}
+                        {
+                            id ?
+                                <img
+                                    style={thumbnailImgStyle}
+                                    src={`https://img.youtube.com/vi/${id}/mqdefault.jpg`}
+                                    alt=""
+                                />
+                                : ''
+                        }
+
+                        {
+                            duration ?
+                                <span className="duration-badge badge badge-dark" style={durationStyle}>
+                                    {duration.hours <= 0 ? '' : duration.hours + ':'}
+                                    {duration.minutes <= 0 ? '' : duration.minutes + ':'}
+                                    {duration.seconds <= 0 ? '00' : duration.seconds}
+                                </span>
+                                : ''
+                        }
 
                     </div>
                     <div
-                        onClick={this.openVideo}  
-                        className="col p-0"
+                        onClick={this.openVideo}
+                        className="col p-0 pl-2"
                         style={titleStyle}
                     >
                         <p className="title text-bolder m-0" style={titleStyle}>{title}</p>
-                        <p className="channelTitle text-muted p-0 m-0" style={titleStyle}>{channelTitle}</p>
+                        <p className="channelTitle text-muted p-0 m-0" style={titleStyle} >{channelTitle}</p>
                         <p className="views text-muted p-0 m-0" style={titleStyle}>{viewCount}</p>
                     </div>
                 </div>
@@ -185,9 +199,9 @@ const durationStyle = {
 // To Do:
 
 // routing in react
-// 1- click on video item open it on watch page
-// 2- build search items pages
-// 3- build homepage - popular videos
+// 1- click on video item open it on watch page - done 
+// 2- build search items pages 
+// 3- build homepage - popular videos - done
 
 
 // 4- build comments in watch page
@@ -196,3 +210,10 @@ const durationStyle = {
 // 5- scroll down load more videos
 // 6- convert links in string into <a> elements
 // 7- fix the iframe of the watch component
+
+
+
+
+/// Bugs 
+// duration if was 0x ... eg. 01 | 02 | 09 it will shows 1 | 2 | 9
+// watch video autoplay, go to next video

@@ -51,9 +51,8 @@ export class Watch extends Component {
         }
     }
 
-    async youtubeAPICall() {
-
-        const youtubeAPI = {
+    async youtubeAPICall(videoId) {
+        const res = {
             "items": [
                 {
                     "id": "2e9diL0xTN4",
@@ -72,15 +71,12 @@ export class Watch extends Component {
                 }
             ]
         }
-
-        return youtubeAPI;
+        return res;
 
         const response = await axios.get('https://www.googleapis.com/youtube/v3/videos', {
             params: {
                 part: "snippet,statistics",
-                // id: "2e9diL0xTN4",
-                // id: "WC7H6-U7T34",
-                id: "kiPwc_nPHYo",
+                id: videoId,
                 key: "AIzaSyAjjdmj2OBbjr096PFMex2hs54gJSJSHhM",
                 fields: "items(id, snippet(title, channelId, channelTitle, publishedAt, description),statistics(viewCount, likeCount, dislikeCount))"
             }
@@ -89,9 +85,21 @@ export class Watch extends Component {
         return response.data;
     }
 
-    async componentDidMount() {
-        let youtubeAPI = await this.youtubeAPICall();
+    getQueryString() {
+        const textUrl = window.document.location.href;
+        const url = new URL(textUrl)
 
+        return url.searchParams.get('v');
+    }
+
+    setPageTitle() {
+        window.document.title = this.state.video.title;
+    }
+
+    async componentDidMount() {
+        const videoIdToWatch = this.getQueryString();
+        const youtubeAPI = await this.youtubeAPICall(videoIdToWatch);
+        
         this.setState({
             video: {
                 id: youtubeAPI.items[0].id,
@@ -106,7 +114,7 @@ export class Watch extends Component {
             }
         });
 
-        window.document.title = this.state.video.title;
+        this.setPageTitle();
     }
 
     render() {
@@ -150,7 +158,7 @@ export class Watch extends Component {
                         </div>
                         <hr />
                         <div>
-                            {/* {channelId ? <VideoDetails details={{ description, publishedAt, channelId, channelTitle }} /> : ''} */}
+                            {channelId ? <VideoDetails details={{ description, publishedAt, channelId, channelTitle }} /> : ''}
                         </div>
                     </div>
                     <div className="col-4 ml-5">

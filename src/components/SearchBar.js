@@ -5,6 +5,10 @@ import { faYoutube } from '@fortawesome/free-brands-svg-icons';
 
 
 export class SearchBar extends Component {
+    goHome = () => {
+        window.location.href = '/';
+    }
+
     submit = (e) => {
         e.preventDefault();
 
@@ -20,8 +24,8 @@ export class SearchBar extends Component {
                     <li className="nav-item mx-4">
                         <FontAwesomeIcon icon={faBars} size="2x" />
                     </li>
-                    <li className="nav-item" style={{ color: 'red' }}>
-                        <FontAwesomeIcon icon={faYoutube} size="2x" />
+                    <li onClick={this.goHome} className="nav-item" style={{ color: 'red', cursor: 'pointer' }}>
+                       <FontAwesomeIcon icon={faYoutube} size="2x" />
                         <span className="mb-5 text-dark font-weight-bolder">
                             <span>YouTube</span>
                             <sup className="text-muted">JO</sup>

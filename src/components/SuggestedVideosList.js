@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import VideoItem from './VideoItem';
-// import Watch from './Watch';
 
 export class SuggestedVideosList extends Component {
     state = {
@@ -9,7 +8,6 @@ export class SuggestedVideosList extends Component {
     }
 
     async youtubeAPICall() {
-
         const res = {
             "items": [
                 {
@@ -59,8 +57,6 @@ export class SuggestedVideosList extends Component {
                 }
             ]
         }
-        
-
         return res;
 
 
@@ -98,14 +94,17 @@ export class SuggestedVideosList extends Component {
                         </label>
                     </form>
                 </div>
-                {this.state.suggestedVideos.map((v, i) => {
-                    if (i === 0)
-                        return (<>
-                            <VideoItem key={i} id={v} />
-                            <hr />
-                        </>);
+                {this.state.suggestedVideos.map((videoId, i) => {
+                    if (i === 0) {
+                        return (
+                            <React.Fragment key={videoId}>
+                                <VideoItem key={videoId} id={videoId} />
+                                <hr  />
+                            </React.Fragment>
+                        );
+                    }
 
-                    return <VideoItem key={i  + 1} id={v} />
+                    return <VideoItem key={videoId} id={videoId} />
                 })}
             </div>
         )

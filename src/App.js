@@ -1,10 +1,13 @@
 import React, { Component } from 'react';
+import {BrowserRouter, Route} from 'react-router-dom';
 import axios from 'axios';
 
+import Home from './components/Home';
+import Watch from './components/Watch';
 import SearchBar from './components/SearchBar';
 
 import './App.css';
-import Watch from './components/Watch';
+
 
 class App extends Component {
   state = {
@@ -34,7 +37,14 @@ class App extends Component {
     return (
       <div className="App">
         <SearchBar searchVideos={this.searchVideos} />
-        <Watch videos={this.state.videos} />
+        <BrowserRouter>
+          <Route exact path="/" component={Home} />
+          <Route 
+            exact
+            path="/watch" 
+            component={() => <Watch videos={this.state.videos} />} 
+          />
+        </BrowserRouter>
       </div>
     );
   }
