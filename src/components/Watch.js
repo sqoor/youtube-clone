@@ -10,7 +10,6 @@ import SuggestedVideosList from './SuggestedVideosList';
 import VideoDetails from './VideoDetails';
 import CommentsList from './CommentsList';
 
-
 import loading from './loading.gif';
 
 export class Watch extends Component {
