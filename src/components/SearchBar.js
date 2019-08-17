@@ -21,6 +21,9 @@ export class SearchBar extends Component {
         e.preventDefault();
 
         const searchQuery = this.searchInput.value;
+        
+        if(searchQuery=== "") return;
+
         window.location.href = `/results?search_query=${searchQuery}`;
     }
 
