@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
-
 import axios from 'axios';
+
 import VideoItem from './VideoItem';
 
 import loading from './loading.gif';
-import './Home.css';
 
 /*
 // suppose to get the popular vidoes on this page
@@ -112,21 +111,26 @@ export class Home extends Component {
         ]
         return res;
 
-        const response = await axios.get('https://www.googleapis.com/youtube/v3/search', {
-            params: {
-                part: 'snippet',
-                type: 'video',
-                maxResults: '10',
-                chart: 'mostPopular',
-                // regionCode: 'JO',
-                // relevanceLanguage: 'ar',
-                fields: 'items(id(videoId))',
-                // key: 'AIzaSyAjjdmj2OBbjr096PFMex2hs54gJSJSHhM'
-                key: 'AIzaSyDux7GMJzNTJPzmWbbm1juDOaLtKKAZf-A'
-            }
-        });
+        try {
+            const response = await axios.get('https://www.googleapis.com/youtube/v3/search', {
+                params: {
+                    part: 'snippet',
+                    type: 'video',
+                    maxResults: '10',
+                    chart: 'mostPopular',
+                    // regionCode: 'JO',
+                    // relevanceLanguage: 'ar',
+                    fields: 'items(id(videoId))',
+                    // key: 'AIzaSyAjjdmj2OBbjr096PFMex2hs54gJSJSHhM'
+                    key: 'AIzaSyDux7GMJzNTJPzmWbbm1juDOaLtKKAZf-A'
+                }
+            });
 
-        return response.data.items;
+            return response.data.items;
+        }
+        catch (err) {
+            console.log(err);
+        }
     }
 
     async componentDidMount() {

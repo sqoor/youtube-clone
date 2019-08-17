@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-
 import axios from 'axios';
 import commaNumber from 'comma-number';
 import abbreviate from 'number-abbreviate';
@@ -77,17 +76,23 @@ export class Watch extends Component {
         }
         return res;
 
-        const response = await axios.get('https://www.googleapis.com/youtube/v3/videos', {
-            params: {
-                part: "snippet,statistics",
-                id: videoId,
-                // key: "AIzaSyAjjdmj2OBbjr096PFMex2hs54gJSJSHhM",
-                key: 'AIzaSyDux7GMJzNTJPzmWbbm1juDOaLtKKAZf-A',
-                fields: "items(id, snippet(title, channelId, channelTitle, publishedAt, description),statistics(viewCount, likeCount, dislikeCount))"
-            }
-        });
+        try {
+            const response = await axios.get('https://www.googleapis.com/youtube/v3/videos', {
+                params: {
+                    part: "snippet,statistics",
+                    id: videoId,
+                    // key: "AIzaSyAjjdmj2OBbjr096PFMex2hs54gJSJSHhM",
+                    key: 'AIzaSyDux7GMJzNTJPzmWbbm1juDOaLtKKAZf-A',
+                    fields: "items(id, snippet(title, channelId, channelTitle, publishedAt, description),statistics(viewCount, likeCount, dislikeCount))"
+                }
+            });
 
-        return response.data;
+            return response.data;
+        }
+        catch (err) {
+            console.log(err)
+        }
+
     }
 
     getQueryString() {
@@ -206,7 +211,6 @@ export class Watch extends Component {
 }
 
 export default Watch
-
 
 const iconsStyle = {
     marginTop: '-4%',

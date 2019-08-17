@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
-import moment from 'moment';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faThumbsUp, faThumbsDown } from '@fortawesome/free-solid-svg-icons';
 import abbrivate from 'number-abbreviate';
-
+import moment from 'moment';
 
 export class Comment extends Component {
     state = {

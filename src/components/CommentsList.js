@@ -1,10 +1,9 @@
 import React, { Component } from 'react'
 import axios from 'axios';
-
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSortAmountUp } from '@fortawesome/free-solid-svg-icons';
-import Comment from './Comment';
 
+import Comment from './Comment';
 
 
 /*
@@ -89,9 +88,6 @@ response.map(c => {
 });
 
 */
-
-
-
 
 export class CommentsList extends Component {
     state = {
@@ -284,20 +280,24 @@ export class CommentsList extends Component {
         ];
         return res;
 
+        try {
+            const response = await axios.get('https://www.googleapis.com/youtube/v3/commentThreads', {
+                params: {
+                    // videoId: this.params.id,
+                    videoId: '2e9diL0xTN4',
+                    part: 'snippet',
+                    maxResults: '10',
+                    order: 'relevance',
+                    key: 'AIzaSyDgIMKseEYKN1i_wfmyC8rJgauscJd8Fqw',
+                    fields: 'items(id, snippet(totalReplyCount,topLevelComment(snippet(authorDisplayName,authorChannelUrl,authorProfileImageUrl,textDisplay,textOriginal,likeCount,publishedAt,updatedAt))))'
+                }
+            });
 
-        const response = await axios.get('https://www.googleapis.com/youtube/v3/commentThreads', {
-            params: {
-                // videoId: this.params.id,
-                videoId: '2e9diL0xTN4',
-                part: 'snippet',
-                maxResults: '10',
-                order: 'relevance',
-                key: 'AIzaSyDgIMKseEYKN1i_wfmyC8rJgauscJd8Fqw',
-                fields: 'items(id, snippet(totalReplyCount,topLevelComment(snippet(authorDisplayName,authorChannelUrl,authorProfileImageUrl,textDisplay,textOriginal,likeCount,publishedAt,updatedAt))))'
-            }
-        });
-
-        return response.data.items;
+            return response.data.items;
+        }
+        catch (err) {
+            console.log(err);
+        }
     }
 
     async componentDidMount() {

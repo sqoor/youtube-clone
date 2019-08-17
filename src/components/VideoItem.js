@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-
 import axios from 'axios';
 import moment from 'moment';
 import abbreviate from 'number-abbreviate';
@@ -72,20 +71,22 @@ export class VideoItem extends Component {
 
         return res.items[0];
 
+        try {
+            const response = await axios.get('https://www.googleapis.com/youtube/v3/videos', {
+                params: {
+                    id: this.props.id,
+                    part: 'snippet,statistics,contentDetails',
+                    // key: 'AIzaSyAjjdmj2OBbjr096PFMex2hs54gJSJSHhM',
+                    key: 'AIzaSyDux7GMJzNTJPzmWbbm1juDOaLtKKAZf-A',
+                    fields: 'items(id,snippet(title, channelId,channelTitle,description),statistics(viewCount),contentDetails(duration))'
+                }
+            });
 
-        const response = await axios.get('https://www.googleapis.com/youtube/v3/videos', {
-            params: {
-                id: this.props.id,
-                part: 'snippet,statistics,contentDetails',
-                // key: 'AIzaSyAjjdmj2OBbjr096PFMex2hs54gJSJSHhM',
-                key: 'AIzaSyDux7GMJzNTJPzmWbbm1juDOaLtKKAZf-A',
-                fields: 'items(id,snippet(title, channelId,channelTitle,description),statistics(viewCount),contentDetails(duration))'
-            }
-        });
-
-        console.log('this.props', this.props)
-        console.log('response.data.items',response.data.items);
-        return response.data.items[0];
+            return response.data.items[0];
+        }
+        catch (err) {
+            console.log(err);
+        }
     }
 
     formatDuration(duration) {
@@ -129,11 +130,11 @@ export class VideoItem extends Component {
         this.setState({ watchVideo: true });
     }
 
-    
+
 
     whileLoadingShowAnimation() {
-        if(this.state.isLoading)
-            return <img src={loading} alt="loading..." width="70px"/> 
+        if (this.state.isLoading)
+            return <img src={loading} alt="loading..." width="70px" />
     }
 
     render() {
@@ -146,14 +147,13 @@ export class VideoItem extends Component {
             description
         } = this.state.video;
 
-        const {showDescription} = this.props;
+        const { showDescription } = this.props;
 
-
-        if(this.state.isLoading) {
+        if (this.state.isLoading) {
             return (
                 <div className="my-3 container-fluid" style={{ position: 'relative' }}>
                     <div className="row">
-                        <img src={loading} alt="loading..." width="70px"/> 
+                        <img src={loading} alt="loading..." width="70px" />
                     </div>
                 </div>
             )
@@ -196,9 +196,9 @@ export class VideoItem extends Component {
                         <p className="title text-bolder m-0" style={titleStyle}>{title}</p>
                         <p className="channelTitle text-muted p-0 m-0" style={titleStyle} >{channelTitle}</p>
                         <p className="views text-muted p-0 m-0" style={titleStyle}>{viewCount}</p>
-                        {showDescription ? 
-                             <p className="views text-muted p-0 m-0" style={titleStyle}>{description.slice(0, 68) + '...'}</p>
-                            : null }
+                        {showDescription ?
+                            <p className="views text-muted p-0 m-0" style={titleStyle}>{description.slice(0, 68) + '...'}</p>
+                            : null}
                     </div>
                 </div>
             </div>

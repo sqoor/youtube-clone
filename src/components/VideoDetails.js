@@ -87,16 +87,21 @@ export class VideoDetails extends Component {
         }
         return responose;
 
-        const response = await axios.get('https://www.googleapis.com/youtube/v3/channels', {
-            params: {
-                part: "snippet,statistics",
-                id: this.props.details.channelId,
-                key: "AIzaSyAjjdmj2OBbjr096PFMex2hs54gJSJSHhM",
-                fields: "items(snippet(thumbnails(default(url))),statistics(subscriberCount))"
-            }
-        });
+        try {
+            const response = await axios.get('https://www.googleapis.com/youtube/v3/channels', {
+                params: {
+                    part: "snippet,statistics",
+                    id: this.props.details.channelId,
+                    key: "AIzaSyAjjdmj2OBbjr096PFMex2hs54gJSJSHhM",
+                    fields: "items(snippet(thumbnails(default(url))),statistics(subscriberCount))"
+                }
+            });
 
-        return response.data;
+            return response.data;
+        }
+        catch (err) {
+            console.log(err);
+        }
     }
 
     async componentDidMount() {
@@ -116,7 +121,6 @@ export class VideoDetails extends Component {
             }
         })
     }
-
 
     toggleFullDescription = (e) => {
         if (e.target.innerText === 'SHOW MORE') {

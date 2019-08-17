@@ -44,21 +44,25 @@ export class Results extends Component {
                 "id": "rg_zwK_sSEY"
             }
         ]
-        return res; 
+        return res;
 
-        console.log(whatToSearchFor);
-        const response = await axios.get('https://www.googleapis.com/youtube/v3/search', {
-            params: {
-                q: whatToSearchFor,
-                part: 'snippet',
-                maxResults: 10,
-                fields: 'items(id(videoId))',
-                // key: 'AIzaSyAjjdmj2OBbjr096PFMex2hs54gJSJSHhM'
-                key: 'AIzaSyDux7GMJzNTJPzmWbbm1juDOaLtKKAZf-A'
-            }
-        });
+        try {
+            const response = await axios.get('https://www.googleapis.com/youtube/v3/search', {
+                params: {
+                    q: whatToSearchFor,
+                    part: 'snippet',
+                    maxResults: 10,
+                    fields: 'items(id(videoId))',
+                    // key: 'AIzaSyAjjdmj2OBbjr096PFMex2hs54gJSJSHhM'
+                    key: 'AIzaSyDux7GMJzNTJPzmWbbm1juDOaLtKKAZf-A'
+                }
+            });
 
-        return response.data.items;
+            return response.data.items;
+        }
+        catch (err) {
+            console.log(err);
+        }
     }
 
     getQueryString() {
@@ -85,22 +89,22 @@ export class Results extends Component {
     }
 
     finishedLoading = (videoId) => {
-        const lastVideo = this.state.videos[this.state.videos.length -1];
+        const lastVideo = this.state.videos[this.state.videos.length - 1];
         const isLastVideo = videoId === lastVideo;
 
-        if(isLastVideo) this.setState({ isLoading: false })
+        if (isLastVideo) this.setState({ isLoading: false })
     }
 
     whileLoadingShowAnimation() {
-        if(this.state.isLoading)
-            return <img src={loading} alt="loading..." width="70px"/> 
+        if (this.state.isLoading)
+            return <img src={loading} alt="loading..." width="70px" />
     }
 
     render() {
         return (
             <div className="container w-75">
                 <h1 className="h5 mb-5"><span className="text-muted">Searched For:</span> {this.state.keyword}</h1>
-                
+
                 {this.whileLoadingShowAnimation()}
 
                 {this.state.videos.map((videoId, i) => {

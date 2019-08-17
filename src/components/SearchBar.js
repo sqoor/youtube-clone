@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
-
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faYoutube } from '@fortawesome/free-brands-svg-icons';
-import { 
+import {
     faBars,
     faSearch,
     faVideo,
@@ -17,7 +16,7 @@ export class SearchBar extends Component {
     goHome = () => {
         window.location.href = '/';
     }
-    
+
     goResult = (e) => {
         e.preventDefault();
 
@@ -33,7 +32,7 @@ export class SearchBar extends Component {
                         <FontAwesomeIcon icon={faBars} size="2x" />
                     </li>
                     <li onClick={this.goHome} className="nav-item" style={iconStyle}>
-                       <FontAwesomeIcon icon={faYoutube} size="2x" />
+                        <FontAwesomeIcon icon={faYoutube} size="2x" />
                         <span className="mb-5 text-dark font-weight-bolder">
                             <span>YouTube</span>
                             <sup className="text-muted">JO</sup>
@@ -91,7 +90,7 @@ const headerStyle = {
     background: 'white'
 }
 
-const iconStyle = { 
+const iconStyle = {
     color: 'red',
     cursor: 'pointer'
 }
