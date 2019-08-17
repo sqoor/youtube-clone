@@ -133,7 +133,7 @@ export class VideoItem extends Component {
                                 <span className="duration-badge badge badge-dark" style={durationStyle}>
                                     {duration.hours <= 0 ? '' : duration.hours + ':'}
                                     {duration.minutes <= 0 ? '' : duration.minutes + ':'}
-                                    {duration.seconds <= 0 ? '00' : duration.seconds}
+                                    {duration.seconds <= 0 ? '00' : duration.seconds < 9 ? '0' + duration.seconds : duration.seconds }
                                 </span>
                                 : ''
                         }
