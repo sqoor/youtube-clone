@@ -12,40 +12,6 @@ export class Results extends Component {
     }
 
     async searchVideos(whatToSearchFor) {
-        const res = [
-            {
-                "id": "qlzVPauUgw8"
-            },
-            {
-                "id": "A2FsgKoGD04"
-            },
-            {
-                "id": "VRJmcxCrAOA"
-            },
-            {
-                "id": "hHW1oY26kxQ"
-            },
-            {
-                "id": "VNM7Z7hir_I"
-            },
-            {
-                "id": "1Za8BtLgKv8"
-            },
-            {
-                "id": "TcMBFSGVi1c"
-            },
-            {
-                "id": "pk7ESz6vtyA"
-            },
-            {
-                "id": "z2VZ_OGz0RU"
-            },
-            {
-                "id": "rg_zwK_sSEY"
-            }
-        ]
-        return res;
-
         try {
             const response = await axios.get('https://www.googleapis.com/youtube/v3/search', {
                 params: {
@@ -53,8 +19,9 @@ export class Results extends Component {
                     part: 'snippet',
                     maxResults: 10,
                     fields: 'items(id(videoId))',
-                    // key: 'AIzaSyAjjdmj2OBbjr096PFMex2hs54gJSJSHhM'
-                    key: 'AIzaSyDux7GMJzNTJPzmWbbm1juDOaLtKKAZf-A'
+                    // key: 'AIzaSyAjjdmj2OBbjr096PFMex2hs54gJSJSHhM',
+                    // key: 'AIzaSyDux7GMJzNTJPzmWbbm1juDOaLtKKAZf-A',
+                    key: 'AIzaSyDgIMKseEYKN1i_wfmyC8rJgauscJd8Fqw',
                 }
             });
 

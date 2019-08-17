@@ -3,29 +3,6 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import abbrivate from 'number-abbreviate';
 
-/*
-// get subscribers count of channel and the thumbnail of the channel
-// https://www.googleapis.com/youtube/v3/channels?part=snippet,statistics&id=UCcN-NDV03eHs6oLd1pe2r8w&fields=items(snippet(thumbnails(default(url))),statistics(subscriberCount))&key=AIzaSyAjjdmj2OBbjr096PFMex2hs54gJSJSHhM
-
-// response: 
-// {
-//     "items": [
-//         {
-//             "snippet": {
-//                 "thumbnails": {
-//                     "default": {
-//                         "url": "https://yt3.ggpht.com/a/AGF-l79VPeDUmOS-auFj9O004tGgKszXguIG9TY-iQ=s88-c-k-c0xffffffff-no-rj-mo"
-//                     }
-//                 }
-//             },
-//             "statistics": {
-//                 "subscriberCount": "2399839"
-//             }
-//         }
-//     ]
-// }
-
-*/
 
 export class VideoDetails extends Component {
 
@@ -69,30 +46,14 @@ export class VideoDetails extends Component {
     }
 
     youtubeAPICall = async () => {
-        const responose = {
-            "items": [
-                {
-                    "snippet": {
-                        "thumbnails": {
-                            "default": {
-                                "url": "https://yt3.ggpht.com/a/AGF-l79VPeDUmOS-auFj9O004tGgKszXguIG9TY-iQ=s88-c-k-c0xffffffff-no-rj-mo"
-                            }
-                        }
-                    },
-                    "statistics": {
-                        "subscriberCount": "2399839"
-                    }
-                }
-            ]
-        }
-        return responose;
-
         try {
             const response = await axios.get('https://www.googleapis.com/youtube/v3/channels', {
                 params: {
                     part: "snippet,statistics",
                     id: this.props.details.channelId,
-                    key: "AIzaSyAjjdmj2OBbjr096PFMex2hs54gJSJSHhM",
+                    // key: 'AIzaSyAjjdmj2OBbjr096PFMex2hs54gJSJSHhM',
+                    // key: 'AIzaSyDux7GMJzNTJPzmWbbm1juDOaLtKKAZf-A',
+                    key: 'AIzaSyDgIMKseEYKN1i_wfmyC8rJgauscJd8Fqw',
                     fields: "items(snippet(thumbnails(default(url))),statistics(subscriberCount))"
                 }
             });

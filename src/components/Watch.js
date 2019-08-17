@@ -12,39 +12,6 @@ import CommentsList from './CommentsList';
 import loading from './loading.gif';
 
 export class Watch extends Component {
-
-    /*
-    // you api call should only request title, views, likes dislikes
-    // youtube api how to retive only certain fields only.
-    // we need channelId channelTitle publishedAt and description to be passed to the details component
-    // request:
-    //https://www.googleapis.com/youtube/v3/videos?part=snippet,statistics&id=2e9diL0xTN4&fields=items(snippet(title),statistics(viewCount, likeCount, dislikeCount))&key=AIzaSyAjjdmj2OBbjr096PFMex2hs54gJSJSHhM
-    //https://www.googleapis.com/youtube/v3/videos?part=snippet,statistics&id=2e9diL0xTN4&fields=items(id, snippet(title),statistics(viewCount, likeCount, dislikeCount))&key=AIzaSyAjjdmj2OBbjr096PFMex2hs54gJSJSHhM
-    // https://www.googleapis.com/youtube/v3/videos?part=snippet,statistics&id=2e9diL0xTN4&fields=items(id, snippet(title, channelId, channelTitle, publishedAt, description),statistics(viewCount, likeCount, dislikeCount))&key=AIzaSyAjjdmj2OBbjr096PFMex2hs54gJSJSHhM
-    // response
-    // const youtubeAPI = {
-    //     "items": [
-    //         {
-    //             "id": "2e9diL0xTN4",
-    //             "snippet": {
-    //                 "publishedAt": "2018-07-03T14:00:00.000Z",
-    //                 "channelId": "UCcN-NDV03eHs6oLd1pe2r8w",
-    //                 "title": "Khalid - OTW (Official Video) ft. 6LACK, Ty Dolla $ign",
-    //                 "description": "Khalid feat. Ty Dolla $ign & 6LACK - OTW (Official Video) Out Now!  http://smarturl.it/XOTW\n \n \nFollow Khalid:\nhttps://www.facebook.com/thegreatkhalid\nhttps://twitter.com/thegreatkhalid\nhttps://www.instagram.com/thegr8khalid/\n \nFollow 6lack:\nhttps://www.facebook.com/6LACK/\nhttps://twitter.com/6LACK\nhttps://www.instagram.com/6lack/\n \nFollow Ty Dolla $ign:\nhttps://www.facebook.com/tydollasign/\nhttps://twitter.com/tydollasign\nhttps://www.instagram.com/tydollasign/",
-    //                 "channelTitle": "KhalidVEVO"
-    //             },
-    //             "statistics": {
-    //                 "viewCount": "108605498",
-    //                 "likeCount": "706485",
-    //                 "dislikeCount": "26505",
-                        "commentCount": "14422"
-    //             }
-    //         }
-    //     ]
-    // }
-
-    */
-
     state = {
         video: {
             id: '',
@@ -57,40 +24,19 @@ export class Watch extends Component {
     }
 
     async youtubeAPICall(videoId) {
-        const res = {
-            "items": [
-                {
-                    "id": "2e9diL0xTN4",
-                    "snippet": {
-                        "publishedAt": "2018-07-03T14:00:00.000Z",
-                        "channelId": "UCcN-NDV03eHs6oLd1pe2r8w",
-                        "title": "Khalid - OTW (Official Video) ft. 6LACK, Ty Dolla $ign",
-                        "description": "Khalid feat. Ty Dolla $ign & 6LACK - OTW (Official Video) Out Now!  http://smarturl.it/XOTW\n \n \nFollow Khalid:\nhttps://www.facebook.com/thegreatkhalid\nhttps://twitter.com/thegreatkhalid\nhttps://www.instagram.com/thegr8khalid/\n \nFollow 6lack:\nhttps://www.facebook.com/6LACK/\nhttps://twitter.com/6LACK\nhttps://www.instagram.com/6lack/\n \nFollow Ty Dolla $ign:\nhttps://www.facebook.com/tydollasign/\nhttps://twitter.com/tydollasign\nhttps://www.instagram.com/tydollasign/",
-                        "channelTitle": "KhalidVEVO"
-                    },
-                    "statistics": {
-                        "viewCount": "108605498",
-                        "likeCount": "706485",
-                        "dislikeCount": "26505",
-                        "commentCount": "14422"
-                    }
-                }
-            ]
-        }
-        // return res;
-
         try {
             const response = await axios.get('https://www.googleapis.com/youtube/v3/videos', {
                 params: {
                     part: "snippet,statistics",
                     id: videoId,
-                    key: "AIzaSyAjjdmj2OBbjr096PFMex2hs54gJSJSHhM",
+                    // key: 'AIzaSyAjjdmj2OBbjr096PFMex2hs54gJSJSHhM',
                     // key: 'AIzaSyDux7GMJzNTJPzmWbbm1juDOaLtKKAZf-A',
-                    // fields: "items(id,snippet(title,channelId,channelTitle,publishedAt,description),statistics(viewCount,likeCount,dislikeCount,commentCount))"
+                    key: 'AIzaSyDgIMKseEYKN1i_wfmyC8rJgauscJd8Fqw',
+                    fields: "items(id,snippet(title,channelId,channelTitle,publishedAt,description),statistics(viewCount,likeCount,dislikeCount,commentCount))"
                 }
             });
 
-            return response.data;
+            return response.data.items[0];
         }
         catch (err) {
             console.log(err)
@@ -111,21 +57,22 @@ export class Watch extends Component {
 
     async componentDidMount() {
         const videoIdToWatch = this.getQueryString();
-        const youtubeAPI = await this.youtubeAPICall(videoIdToWatch);
+        const response = await this.youtubeAPICall(videoIdToWatch);
 
-        console.log(youtubeAPI.items[0]);
+        if(!response) return;
+
         this.setState({
             video: {
-                id: youtubeAPI.items[0].id,
-                title: youtubeAPI.items[0].snippet.title,
-                description: youtubeAPI.items[0].snippet.description,
-                publishedAt: youtubeAPI.items[0].snippet.publishedAt,
-                channelId: youtubeAPI.items[0].snippet.channelId,
-                channelTitle: youtubeAPI.items[0].snippet.channelTitle,
-                views: commaNumber(youtubeAPI.items[0].statistics.viewCount),
-                likes: abbreviate(youtubeAPI.items[0].statistics.likeCount),
-                dislikes: abbreviate(youtubeAPI.items[0].statistics.dislikeCount),
-                commentCount: abbreviate(youtubeAPI.items[0].statistics.commentCount)
+                id: response.id,
+                title: response.snippet.title,
+                description: response.snippet.description,
+                publishedAt: response.snippet.publishedAt,
+                channelId: response.snippet.channelId,
+                channelTitle: response.snippet.channelTitle,
+                views: commaNumber(response.statistics.viewCount),
+                likes: abbreviate(response.statistics.likeCount),
+                dislikes: abbreviate(response.statistics.dislikeCount),
+                commentCount: abbreviate(response.statistics.commentCount)
             }
         });
 
@@ -178,6 +125,7 @@ export class Watch extends Component {
                             </iframe>
                             :
                             <iframe
+                                title={id}
                                 frameBorder='0'
                                 width="800px"
                                 height="500px"

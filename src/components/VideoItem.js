@@ -5,33 +5,6 @@ import abbreviate from 'number-abbreviate';
 
 import loading from './loading.gif';
 
-/*
-    // id title views duration, channelId, channelTitle
-    // request 
-    // https://www.googleapis.com/youtube/v3/videos?part=statistics,contentDetails&id=2e9diL0xTN4&fields=items(statistics(viewCount),contentDetails(duration))&key=AIzaSyAjjdmj2OBbjr096PFMex2hs54gJSJSHhM
-    https://www.googleapis.com/youtube/v3/videos?part=snippet,statistics,contentDetails&id=2e9diL0xTN4&fields=items(id,snippet(title, channelId,channelTitle),statistics(viewCount),contentDetails(duration))&key=AIzaSyAjjdmj2OBbjr096PFMex2hs54gJSJSHhM
-    // reponse 
-       {
-    "items": [
-        {
-            "id": "2e9diL0xTN4",
-            "snippet": {
-                "channelId": "UCcN-NDV03eHs6oLd1pe2r8w",
-                "title": "Khalid - OTW (Official Video) ft. 6LACK, Ty Dolla $ign",
-                "channelTitle": "KhalidVEVO"
-            },
-            "contentDetails": {
-                "duration": "PT4M17S"
-            },
-            "statistics": {
-                "viewCount": "108758288"
-            }
-        }
-    ]
-}
-
-        */
-
 export class VideoItem extends Component {
     state = {
         video: {
@@ -48,36 +21,14 @@ export class VideoItem extends Component {
     }
 
     async youtubeAPICall() {
-
-        const res = {
-            "items": [
-                {
-                    "id": "2e9diL0xTN4",
-                    "snippet": {
-                        "channelId": "UCcN-NDV03eHs6oLd1pe2r8w",
-                        "title": "Khalid - OTW (Official Video) ft. 6LACK, Ty Dolla $ign",
-                        "channelTitle": "KhalidVEVO",
-                        "description": "Khalid feat. Ty Dolla $ign & 6LACK - OTW (Official Video) Out Now!  http://smarturl.it/XOTW\n \n \nFollow Khalid:\nhttps://www.facebook.com/thegreatkhalid\nhttps://twitter.com/thegreatkhalid\nhttps://www.instagram.com/thegr8khalid/\n \nFollow 6lack:\nhttps://www.facebook.com/6LACK/\nhttps://twitter.com/6LACK\nhttps://www.instagram.com/6lack/\n \nFollow Ty Dolla $ign:\nhttps://www.facebook.com/tydollasign/\nhttps://twitter.com/tydollasign\nhttps://www.instagram.com/tydollasign/"
-                    },
-                    "contentDetails": {
-                        "duration": "PT4M17S"
-                    },
-                    "statistics": {
-                        "viewCount": "108758288"
-                    }
-                }
-            ]
-        }
-
-        return res.items[0];
-
         try {
             const response = await axios.get('https://www.googleapis.com/youtube/v3/videos', {
                 params: {
                     id: this.props.id,
                     part: 'snippet,statistics,contentDetails',
                     // key: 'AIzaSyAjjdmj2OBbjr096PFMex2hs54gJSJSHhM',
-                    key: 'AIzaSyDux7GMJzNTJPzmWbbm1juDOaLtKKAZf-A',
+                    // key: 'AIzaSyDux7GMJzNTJPzmWbbm1juDOaLtKKAZf-A',
+                    key: 'AIzaSyDgIMKseEYKN1i_wfmyC8rJgauscJd8Fqw',
                     fields: 'items(id,snippet(title, channelId,channelTitle,description),statistics(viewCount),contentDetails(duration))'
                 }
             });

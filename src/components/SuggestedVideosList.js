@@ -12,66 +12,16 @@ export class SuggestedVideosList extends Component {
     }
 
     async youtubeAPICall() {
-        const res = {
-            "items": [
-                {
-                    "id": {
-                        "videoId": "by3yRdlQvzs"
-                    }
-                },
-                {
-                    "id": {
-                        "videoId": "2zn4dAuZ2RU"
-                    }
-                },
-                {
-                    "id": {
-                        "videoId": "9bgap3QMwSo"
-                    }
-                },
-                {
-                    "id": {
-                        "videoId": "UdLQwzofhMo"
-                    }
-                },
-                {
-                    "id": {
-                        "videoId": "Jqs5EaAaueA"
-                    }
-                },
-                {
-                    "id": {
-                        "videoId": "JfGD75vHWrU"
-                    }
-                },
-                {
-                    "id": {
-                        "videoId": "b9yJk4jP6-8"
-                    }
-                },
-                {
-                    "id": {
-                        "videoId": "mi9aLWGeYtk"
-                    }
-                },
-                {
-                    "id": {
-                        "videoId": "VPeWDg6B4sI"
-                    }
-                }
-            ]
-        }
-        return res;
-
         try {
             const response = await axios.get('https://www.googleapis.com/youtube/v3/search', {
                 params: {
                     part: 'snippet',
                     type: 'video',
-                    maxResults: '10',
+                    maxResults: '22',
                     relatedToVideoId: this.props.videoId,
                     // key: 'AIzaSyAjjdmj2OBbjr096PFMex2hs54gJSJSHhM',
-                    key: 'AIzaSyDux7GMJzNTJPzmWbbm1juDOaLtKKAZf-A',
+                    // key: 'AIzaSyDux7GMJzNTJPzmWbbm1juDOaLtKKAZf-A',
+                    key: 'AIzaSyDgIMKseEYKN1i_wfmyC8rJgauscJd8Fqw',
                     fields: 'items(id(videoId))'
                 }
             });

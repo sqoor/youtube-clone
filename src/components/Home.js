@@ -2,73 +2,8 @@ import React, { Component } from 'react';
 import axios from 'axios';
 
 import VideoItem from './VideoItem';
-
 import loading from './loading.gif';
 
-/*
-// suppose to get the popular vidoes on this page
-
-// request: 
-// https://www.googleapis.com/youtube/v3/search?part=snippet&type=video&key=AIzaSyAjjdmj2OBbjr096PFMex2hs54gJSJSHhM&maxResults=10&chart=mostPopular
-// https://www.googleapis.com/youtube/v3/search?part=snippet&type=video&key=AIzaSyAjjdmj2OBbjr096PFMex2hs54gJSJSHhM&fields=items(id(videoId))&maxResults=10&chart=mostPopular
-// response: 
-//
-// {
-//     "items": [
-//         {
-//             "id": {
-//                 "videoId": "qlzVPauUgw8"
-//             }
-//         },
-//         {
-//             "id": {
-//                 "videoId": "A2FsgKoGD04"
-//             }
-//         },
-//         {
-//             "id": {
-//                 "videoId": "VRJmcxCrAOA"
-//             }
-//         },
-//         {
-//             "id": {
-//                 "videoId": "hHW1oY26kxQ"
-//             }
-//         },
-//         {
-//             "id": {
-//                 "videoId": "VNM7Z7hir_I"
-//             }
-//         },
-//         {
-//             "id": {
-//                 "videoId": "1Za8BtLgKv8"
-//             }
-//         },
-//         {
-//             "id": {
-//                 "videoId": "TcMBFSGVi1c"
-//             }
-//         },
-//         {
-//             "id": {
-//                 "videoId": "pk7ESz6vtyA"
-//             }
-//         },
-//         {
-//             "id": {
-//                 "videoId": "z2VZ_OGz0RU"
-//             }
-//         },
-//         {
-//             "id": {
-//                 "videoId": "rg_zwK_sSEY"
-//             }
-//         }
-//     ]
-// }
-
-*/
 
 export class Home extends Component {
     state = {
@@ -77,40 +12,6 @@ export class Home extends Component {
     }
 
     async youtubeApiCall() {
-        const res = [
-            {
-                "id": "qlzVPauUgw8"
-            },
-            {
-                "id": "A2FsgKoGD04"
-            },
-            {
-                "id": "VRJmcxCrAOA"
-            },
-            {
-                "id": "hHW1oY26kxQ"
-            },
-            {
-                "id": "VNM7Z7hir_I"
-            },
-            {
-                "id": "1Za8BtLgKv8"
-            },
-            {
-                "id": "TcMBFSGVi1c"
-            },
-            {
-                "id": "pk7ESz6vtyA"
-            },
-            {
-                "id": "z2VZ_OGz0RU"
-            },
-            {
-                "id": "rg_zwK_sSEY"
-            }
-        ]
-        return res;
-
         try {
             const response = await axios.get('https://www.googleapis.com/youtube/v3/search', {
                 params: {
@@ -121,8 +22,9 @@ export class Home extends Component {
                     // regionCode: 'JO',
                     // relevanceLanguage: 'ar',
                     fields: 'items(id(videoId))',
-                    // key: 'AIzaSyAjjdmj2OBbjr096PFMex2hs54gJSJSHhM'
-                    key: 'AIzaSyDux7GMJzNTJPzmWbbm1juDOaLtKKAZf-A'
+                    // key: 'AIzaSyAjjdmj2OBbjr096PFMex2hs54gJSJSHhM',
+                    // key: 'AIzaSyDux7GMJzNTJPzmWbbm1juDOaLtKKAZf-A',
+                    key: 'AIzaSyDgIMKseEYKN1i_wfmyC8rJgauscJd8Fqw',
                 }
             });
 
