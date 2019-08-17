@@ -121,13 +121,13 @@ export class SuggestedVideosList extends Component {
                     if (i === 0) {
                         return (
                             <React.Fragment key={videoId}>
-                                <VideoItem key={videoId} id={videoId} finishedLoading={this.finishedLoading} />
+                                <VideoItem key={videoId} id={videoId} finishedLoading={this.finishedLoading} showDescription={false} />
                                 <hr  />
                             </React.Fragment>
                         );
                     }
 
-                    return <VideoItem key={videoId} id={videoId} finishedLoading={this.finishedLoading} />
+                    return <VideoItem key={videoId} id={videoId} finishedLoading={this.finishedLoading} showDescription={false} />
                 })}
             </div>
         )

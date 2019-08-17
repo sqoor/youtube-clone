@@ -104,7 +104,7 @@ export class Results extends Component {
                 {this.whileLoadingShowAnimation()}
 
                 {this.state.videos.map((videoId, i) => {
-                    return <VideoItem key={i} id={videoId} finishedLoading={this.finishedLoading} />;
+                    return <VideoItem key={i} id={videoId} finishedLoading={this.finishedLoading} showDescription={true} />;
                 })}
             </div>
         );

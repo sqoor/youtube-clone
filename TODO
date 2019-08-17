@@ -10,7 +10,7 @@ not very important
 5- scroll down load more videos
 6- convert links in string into <a> elements
 7- fix the iframe of the watch component
-8- add animation - waiting when waiting for the api to render the data. set in center of page
+8- add animation - waiting when waiting for the api to render the data. set in center of page - done partially
 9- Add advanced filtering
 10- description in homepage & result pages. passed to vidoeitem component.
 

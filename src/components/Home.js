@@ -156,7 +156,7 @@ export class Home extends Component {
                 <h1 className="h5">Popular Videos</h1>
                 {
                     this.state.videos.map((id, i) => {
-                        return <VideoItem key={i} id={id} finishedLoading={this.finishedLoading} />;
+                        return <VideoItem key={i} id={id} finishedLoading={this.finishedLoading} showDescription={true} />;
                     })
                 }
             </div>

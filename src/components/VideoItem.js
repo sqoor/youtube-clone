@@ -42,6 +42,7 @@ export class VideoItem extends Component {
             viewCount: '',
             channelId: '',
             channelTitle: '',
+            description: '',
         },
         watchVideo: false,
         isLoading: true
@@ -56,7 +57,8 @@ export class VideoItem extends Component {
                     "snippet": {
                         "channelId": "UCcN-NDV03eHs6oLd1pe2r8w",
                         "title": "Khalid - OTW (Official Video) ft. 6LACK, Ty Dolla $ign",
-                        "channelTitle": "KhalidVEVO"
+                        "channelTitle": "KhalidVEVO",
+                        "description": "Khalid feat. Ty Dolla $ign & 6LACK - OTW (Official Video) Out Now!  http://smarturl.it/XOTW\n \n \nFollow Khalid:\nhttps://www.facebook.com/thegreatkhalid\nhttps://twitter.com/thegreatkhalid\nhttps://www.instagram.com/thegr8khalid/\n \nFollow 6lack:\nhttps://www.facebook.com/6LACK/\nhttps://twitter.com/6LACK\nhttps://www.instagram.com/6lack/\n \nFollow Ty Dolla $ign:\nhttps://www.facebook.com/tydollasign/\nhttps://twitter.com/tydollasign\nhttps://www.instagram.com/tydollasign/"
                     },
                     "contentDetails": {
                         "duration": "PT4M17S"
@@ -77,7 +79,7 @@ export class VideoItem extends Component {
                 part: 'snippet,statistics,contentDetails',
                 // key: 'AIzaSyAjjdmj2OBbjr096PFMex2hs54gJSJSHhM',
                 key: 'AIzaSyDux7GMJzNTJPzmWbbm1juDOaLtKKAZf-A',
-                fields: 'items(id,snippet(title, channelId,channelTitle),statistics(viewCount),contentDetails(duration))'
+                fields: 'items(id,snippet(title, channelId,channelTitle,description),statistics(viewCount),contentDetails(duration))'
             }
         });
 
@@ -114,7 +116,8 @@ export class VideoItem extends Component {
                 duration: this.formatDuration(video.contentDetails.duration),
                 viewCount: this.formatViews(video.statistics.viewCount),
                 channelId: video.snippet.channelId,
-                channelTitle: video.snippet.channelTitle
+                channelTitle: video.snippet.channelTitle,
+                description: video.snippet.description
             }
         });
 
@@ -140,8 +143,11 @@ export class VideoItem extends Component {
             title,
             duration,
             viewCount,
-            channelTitle
+            channelTitle,
+            description
         } = this.state.video;
+
+        const {showDescription} = this.props;
 
 
         if(this.state.isLoading) {
@@ -191,6 +197,9 @@ export class VideoItem extends Component {
                         <p className="title text-bolder m-0" style={titleStyle}>{title}</p>
                         <p className="channelTitle text-muted p-0 m-0" style={titleStyle} >{channelTitle}</p>
                         <p className="views text-muted p-0 m-0" style={titleStyle}>{viewCount}</p>
+                        {showDescription ? 
+                             <p className="views text-muted p-0 m-0" style={titleStyle}>{description.slice(0, 68) + '...'}</p>
+                            : null }
                     </div>
                 </div>
             </div>
