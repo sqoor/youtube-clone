@@ -310,9 +310,11 @@ export class CommentsList extends Component {
 
     render() {
         const { comments } = this.state;
+        const { commentCount } = this.props;
+        console.log(commentCount);
         return (
             <div>
-                <div>127 Comments <span style={{ cursor: 'pointer' }} className="text-muted ml-4"><FontAwesomeIcon icon={faSortAmountUp} /> SORT BY</span></div>
+                <div>{commentCount} Comments <span style={{ cursor: 'pointer' }} className="text-muted ml-4"><FontAwesomeIcon icon={faSortAmountUp} /> SORT BY</span></div>
                 {comments.map(c => {
                     return <Comment key={c.id} details={c} />
                 })}

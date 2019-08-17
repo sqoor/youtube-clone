@@ -36,7 +36,8 @@ export class Watch extends Component {
     //             "statistics": {
     //                 "viewCount": "108605498",
     //                 "likeCount": "706485",
-    //                 "dislikeCount": "26505"
+    //                 "dislikeCount": "26505",
+                        "commentCount": "14422"
     //             }
     //         }
     //     ]
@@ -50,7 +51,8 @@ export class Watch extends Component {
             title: '',
             views: '',
             likes: '',
-            dislikes: ''
+            dislikes: '',
+            commentCount: ''
         }
     }
 
@@ -69,21 +71,22 @@ export class Watch extends Component {
                     "statistics": {
                         "viewCount": "108605498",
                         "likeCount": "706485",
-                        "dislikeCount": "26505"
+                        "dislikeCount": "26505",
+                        "commentCount": "14422"
                     }
                 }
             ]
         }
-        return res;
+        // return res;
 
         try {
             const response = await axios.get('https://www.googleapis.com/youtube/v3/videos', {
                 params: {
                     part: "snippet,statistics",
                     id: videoId,
-                    // key: "AIzaSyAjjdmj2OBbjr096PFMex2hs54gJSJSHhM",
-                    key: 'AIzaSyDux7GMJzNTJPzmWbbm1juDOaLtKKAZf-A',
-                    fields: "items(id, snippet(title, channelId, channelTitle, publishedAt, description),statistics(viewCount, likeCount, dislikeCount))"
+                    key: "AIzaSyAjjdmj2OBbjr096PFMex2hs54gJSJSHhM",
+                    // key: 'AIzaSyDux7GMJzNTJPzmWbbm1juDOaLtKKAZf-A',
+                    // fields: "items(id,snippet(title,channelId,channelTitle,publishedAt,description),statistics(viewCount,likeCount,dislikeCount,commentCount))"
                 }
             });
 
@@ -110,6 +113,7 @@ export class Watch extends Component {
         const videoIdToWatch = this.getQueryString();
         const youtubeAPI = await this.youtubeAPICall(videoIdToWatch);
 
+        console.log(youtubeAPI.items[0]);
         this.setState({
             video: {
                 id: youtubeAPI.items[0].id,
@@ -120,7 +124,8 @@ export class Watch extends Component {
                 channelTitle: youtubeAPI.items[0].snippet.channelTitle,
                 views: commaNumber(youtubeAPI.items[0].statistics.viewCount),
                 likes: abbreviate(youtubeAPI.items[0].statistics.likeCount),
-                dislikes: abbreviate(youtubeAPI.items[0].statistics.dislikeCount)
+                dislikes: abbreviate(youtubeAPI.items[0].statistics.dislikeCount),
+                commentCount: abbreviate(youtubeAPI.items[0].statistics.commentCount)
             }
         });
 
@@ -152,7 +157,8 @@ export class Watch extends Component {
             description,
             publishedAt,
             channelId,
-            channelTitle
+            channelTitle,
+            commentCount
         } = this.state.video;
 
         return (
@@ -197,7 +203,7 @@ export class Watch extends Component {
                         <div>
                             {channelId ? <VideoDetails details={{ description, publishedAt, channelId, channelTitle }} /> : ''}
                             <div className="m-5">
-                                <CommentsList />
+                                <CommentsList commentCount={commentCount} />
                             </div>
                         </div>
                     </div>
