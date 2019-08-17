@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+
 import axios from 'axios';
 import commaNumber from 'comma-number';
 import abbreviate from 'number-abbreviate';
@@ -7,6 +8,8 @@ import { faThumbsUp, faThumbsDown, faShare, faEllipsisH, faBars } from '@fortawe
 
 import SuggestedVideosList from './SuggestedVideosList';
 import VideoDetails from './VideoDetails';
+
+import loading from './loading.gif';
 
 export class Watch extends Component {
 
@@ -71,13 +74,14 @@ export class Watch extends Component {
                 }
             ]
         }
-        return res;
+        // return res;
 
         const response = await axios.get('https://www.googleapis.com/youtube/v3/videos', {
             params: {
                 part: "snippet,statistics",
                 id: videoId,
-                key: "AIzaSyAjjdmj2OBbjr096PFMex2hs54gJSJSHhM",
+                // key: "AIzaSyAjjdmj2OBbjr096PFMex2hs54gJSJSHhM",
+                key: 'AIzaSyDux7GMJzNTJPzmWbbm1juDOaLtKKAZf-A',
                 fields: "items(id, snippet(title, channelId, channelTitle, publishedAt, description),statistics(viewCount, likeCount, dislikeCount))"
             }
         });
@@ -99,7 +103,7 @@ export class Watch extends Component {
     async componentDidMount() {
         const videoIdToWatch = this.getQueryString();
         const youtubeAPI = await this.youtubeAPICall(videoIdToWatch);
-        
+
         this.setState({
             video: {
                 id: youtubeAPI.items[0].id,
@@ -115,6 +119,21 @@ export class Watch extends Component {
         });
 
         this.setPageTitle();
+    }
+
+    loadingIframeStyling(e) {
+        try {
+            const iframeContentHolder = e.target.contentDocument.children[0].children[1];
+            const iframeContenet = e.target.contentDocument.children[0].children[1].children[0];
+
+            iframeContentHolder.style.display = 'flex';
+            iframeContentHolder.style.justifyContent = 'center';
+            iframeContentHolder.style.alignItems = 'center';
+            iframeContenet.style.width = '60px';
+        }
+        catch {
+            return;
+        }
     }
 
     render() {
@@ -134,15 +153,27 @@ export class Watch extends Component {
             <div className="container-fluid">
                 <div className="row">
                     <div className="col-7 pr-0">
-                        <iframe
-                            frameBorder='0'
-                            title={id}
-                            allowFullScreen
-                            width="800px"
-                            height="500px"
-                            src={`https://www.youtube.com/embed/${id}`}
-                        >
-                        </iframe>
+                        {id ?
+                            <iframe
+                                title={id}
+                                frameBorder='0'
+                                allowFullScreen
+                                width="800px"
+                                height="500px"
+                                src={`https://www.youtube.com/embed/${id}`}
+                                onLoad={this.loadingIframeStyling}
+                            >
+                            </iframe>
+                            :
+                            <iframe
+                                frameBorder='0'
+                                width="800px"
+                                height="500px"
+                                src={loading}
+                                onLoad={this.loadingIframeStyling}
+                            >
+                            </iframe>
+                        }
                         <div className="mt-3">
                             <h3 className="video-title h6">{title}</h3>
                             <p style={{ fontSize: '.93rem' }} className="text-muted">{views} views</p>
@@ -162,7 +193,7 @@ export class Watch extends Component {
                         </div>
                     </div>
                     <div className="col-4 ml-5">
-                        {id ?  <SuggestedVideosList videoId={id} /> : ''}
+                        {id ? <SuggestedVideosList videoId={id} /> : ''}
                     </div>
                 </div>
             </div>

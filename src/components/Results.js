@@ -53,7 +53,8 @@ export class Results extends Component {
                 part: 'snippet',
                 maxResults: 10,
                 fields: 'items(id(videoId))',
-                key: 'AIzaSyAjjdmj2OBbjr096PFMex2hs54gJSJSHhM'
+                // key: 'AIzaSyAjjdmj2OBbjr096PFMex2hs54gJSJSHhM'
+                key: 'AIzaSyDux7GMJzNTJPzmWbbm1juDOaLtKKAZf-A'
             }
         });
 
@@ -86,10 +87,6 @@ export class Results extends Component {
     finishedLoading = (videoId) => {
         const lastVideo = this.state.videos[this.state.videos.length -1];
         const isLastVideo = videoId === lastVideo;
-        
-        console.log('videoId', videoId);
-        console.log('lastVideo', lastVideo);
-        console.log('isLastVideo', isLastVideo);
 
         if(isLastVideo) this.setState({ isLoading: false })
     }
@@ -103,9 +100,11 @@ export class Results extends Component {
         return (
             <div className="container w-75">
                 <h1 className="h5 mb-5"><span className="text-muted">Searched For:</span> {this.state.keyword}</h1>
+                
                 {this.whileLoadingShowAnimation()}
+
                 {this.state.videos.map((videoId, i) => {
-                        return <VideoItem key={i} id={videoId} finishedLoading={this.finishedLoading} />;
+                    return <VideoItem key={i} id={videoId} finishedLoading={this.finishedLoading} />;
                 })}
             </div>
         );

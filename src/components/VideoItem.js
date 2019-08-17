@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
+
 import axios from 'axios';
 import moment from 'moment';
 import abbreviate from 'number-abbreviate';
+
 import loading from './loading.gif';
 
 /*
@@ -41,7 +43,8 @@ export class VideoItem extends Component {
             channelId: '',
             channelTitle: '',
         },
-        watchVideo: false
+        watchVideo: false,
+        isLoading: true
     }
 
     async youtubeAPICall() {
@@ -65,14 +68,15 @@ export class VideoItem extends Component {
             ]
         }
 
-        // return res.items[0];
+        return res.items[0];
 
 
         const response = await axios.get('https://www.googleapis.com/youtube/v3/videos', {
             params: {
                 id: this.props.id,
                 part: 'snippet,statistics,contentDetails',
-                key: 'AIzaSyAjjdmj2OBbjr096PFMex2hs54gJSJSHhM',
+                // key: 'AIzaSyAjjdmj2OBbjr096PFMex2hs54gJSJSHhM',
+                key: 'AIzaSyDux7GMJzNTJPzmWbbm1juDOaLtKKAZf-A',
                 fields: 'items(id,snippet(title, channelId,channelTitle),statistics(viewCount),contentDetails(duration))'
             }
         });
@@ -94,6 +98,11 @@ export class VideoItem extends Component {
         return abbreviate(viewsNumber, 1)
     }
 
+    finishedLoading = () => {
+        this.setState({
+            isLoading: false
+        })
+    }
     async componentDidMount() {
         const video = await this.youtubeAPICall();
         console.log('video', video);
@@ -110,11 +119,19 @@ export class VideoItem extends Component {
         });
 
         this.props.finishedLoading(this.props.id);
+        this.finishedLoading();
     }
 
     openVideo = () => {
         window.location.href = `/watch?v=${this.state.video.id}`
         this.setState({ watchVideo: true });
+    }
+
+    
+
+    whileLoadingShowAnimation() {
+        if(this.state.isLoading)
+            return <img src={loading} alt="loading..." width="70px"/> 
     }
 
     render() {
@@ -125,6 +142,17 @@ export class VideoItem extends Component {
             viewCount,
             channelTitle
         } = this.state.video;
+
+
+        if(this.state.isLoading) {
+            return (
+                <div className="my-3 container-fluid" style={{ position: 'relative' }}>
+                    <div className="row">
+                        <img src={loading} alt="loading..." width="70px"/> 
+                    </div>
+                </div>
+            )
+        }
 
         return (
             <div className="my-3 container-fluid" style={{ position: 'relative' }}>

@@ -19,6 +19,9 @@ not very important
 /// Bugs 
 duration if was 0x ... eg. 01 | 02 | 09 it will shows 1 | 2 | 9
 watch video autoplay, go to next video
+homepage api request
+
+// reafacor loading in suggestedvideos & videosItem & results
 
 
 

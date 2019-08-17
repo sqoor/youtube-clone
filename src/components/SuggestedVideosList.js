@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
+
 import axios from 'axios';
 import VideoItem from './VideoItem';
-import { loading } from './loading.gif';
+
+import loading from './loading.gif';
 
 export class SuggestedVideosList extends Component {
     state = {
@@ -61,14 +63,14 @@ export class SuggestedVideosList extends Component {
         }
         return res;
 
-
         const response =  await axios.get('https://www.googleapis.com/youtube/v3/search', {
             params: {
                 part: 'snippet',
                 type: 'video',
                 maxResults: '10',
                 relatedToVideoId: this.props.videoId,
-                key: 'AIzaSyAjjdmj2OBbjr096PFMex2hs54gJSJSHhM',
+                // key: 'AIzaSyAjjdmj2OBbjr096PFMex2hs54gJSJSHhM',
+                key: 'AIzaSyDux7GMJzNTJPzmWbbm1juDOaLtKKAZf-A',
                 fields: 'items(id(videoId))'
             }
         });
@@ -96,15 +98,22 @@ export class SuggestedVideosList extends Component {
     }
     
     render() {
+        this.whileLoadingShowAnimation();
+
         return (
-            <div style={{ border: '0px solid red' }}>
-                {this.whileLoadingShowAnimation()}
+            <div>
                 <div>
                     Up next
-                    <form className="form-inline range-field d-inline  float-right">
-                        <label className="text-muted font-weight-bold " htmlFor="auto-play">
+                    <form className="form-inline range-field d-inline float-right">
+                        <label className="text-muted font-weight-bold" htmlFor="auto-play">
                             <small>AUTOPLAY &nbsp;</small>
-                            <input style={{width: '30px'}} id="auto-play" type="range" className="custom-range" min="0" max="1" />    
+                            <input 
+                                style={{width: '30px'}} 
+                                id="auto-play" 
+                                type="range" 
+                                className="custom-range" 
+                                min="0" max="1"
+                            />    
                         </label>
                     </form>
                 </div>

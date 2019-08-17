@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
-import VideoItem from './VideoItem';
-import './Home.css';
-import axios from 'axios';
 
+import axios from 'axios';
+import VideoItem from './VideoItem';
+
+import loading from './loading.gif';
+import './Home.css';
 
 /*
 // suppose to get the popular vidoes on this page
@@ -69,12 +71,11 @@ import axios from 'axios';
 
 */
 
-
 export class Home extends Component {
     state = {
-        videos: []
+        videos: [],
+        isLoading: true
     }
-
 
     async youtubeApiCall() {
         const res = [
@@ -117,8 +118,11 @@ export class Home extends Component {
                 type: 'video',
                 maxResults: '10',
                 chart: 'mostPopular',
+                // regionCode: 'JO',
+                // relevanceLanguage: 'ar',
                 fields: 'items(id(videoId))',
-                key: 'AIzaSyAjjdmj2OBbjr096PFMex2hs54gJSJSHhM'
+                // key: 'AIzaSyAjjdmj2OBbjr096PFMex2hs54gJSJSHhM'
+                key: 'AIzaSyDux7GMJzNTJPzmWbbm1juDOaLtKKAZf-A'
             }
         });
 
@@ -133,14 +137,26 @@ export class Home extends Component {
         });
     }
 
+    finishedLoading = (videoId) => {
+        const lastVideo = this.state.videos[this.state.videos.length - 1];
+        const isLastVideo = videoId === lastVideo;
+
+        if (isLastVideo) this.setState({ isLoading: false })
+    }
+
+    whileLoadingShowAnimation() {
+        if (this.state.isLoading) return <img src={loading} alt="loading..." width="70px" />
+    }
 
     render() {
+        this.whileLoadingShowAnimation();
+
         return (
             <div className="container w-75">
                 <h1 className="h5">Popular Videos</h1>
                 {
                     this.state.videos.map((id, i) => {
-                        return <VideoItem key={i} id={id} />;
+                        return <VideoItem key={i} id={id} finishedLoading={this.finishedLoading} />;
                     })
                 }
             </div>

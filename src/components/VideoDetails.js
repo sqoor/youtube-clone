@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
+
 import axios from 'axios';
 import abbrivate from 'number-abbreviate';
-
 
 /*
 // get subscribers count of channel and the thumbnail of the channel
@@ -26,7 +26,6 @@ import abbrivate from 'number-abbreviate';
 // }
 
 */
-
 
 export class VideoDetails extends Component {
 
@@ -70,25 +69,24 @@ export class VideoDetails extends Component {
     }
 
     youtubeAPICall = async () => {
-
         const responose = {
-                "items": [
-                    {
-                        "snippet": {
-                            "thumbnails": {
-                                "default": {
-                                    "url": "https://yt3.ggpht.com/a/AGF-l79VPeDUmOS-auFj9O004tGgKszXguIG9TY-iQ=s88-c-k-c0xffffffff-no-rj-mo"
-                                }
+            "items": [
+                {
+                    "snippet": {
+                        "thumbnails": {
+                            "default": {
+                                "url": "https://yt3.ggpht.com/a/AGF-l79VPeDUmOS-auFj9O004tGgKszXguIG9TY-iQ=s88-c-k-c0xffffffff-no-rj-mo"
                             }
-                        },
-                        "statistics": {
-                            "subscriberCount": "2399839"
                         }
+                    },
+                    "statistics": {
+                        "subscriberCount": "2399839"
                     }
-                ]
-            }
-            return responose;
-            
+                }
+            ]
+        }
+        return responose;
+
         const response = await axios.get('https://www.googleapis.com/youtube/v3/channels', {
             params: {
                 part: "snippet,statistics",
@@ -132,7 +130,7 @@ export class VideoDetails extends Component {
     }
 
     render() {
-        const { 
+        const {
             channelTitle,
             publishedAt,
             description,

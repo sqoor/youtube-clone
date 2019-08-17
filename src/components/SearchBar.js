@@ -1,7 +1,16 @@
 import React, { Component } from 'react';
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBars, faSearch, faVideo, faEllipsisV, faTh, faShareSquare, faUserCircle } from '@fortawesome/free-solid-svg-icons';
 import { faYoutube } from '@fortawesome/free-brands-svg-icons';
+import { 
+    faBars,
+    faSearch,
+    faVideo,
+    faEllipsisV,
+    faTh,
+    faShareSquare,
+    faUserCircle
+} from '@fortawesome/free-solid-svg-icons';
 
 
 export class SearchBar extends Component {
@@ -16,14 +25,6 @@ export class SearchBar extends Component {
         window.location.href = `/results?search_query=${searchQuery}`;
     }
 
-    submit = (e) => {
-        e.preventDefault();
-
-        console.log('search input:', this.searchInput.value);
-        this.props.searchVideos(this.searchInput.value);
-        this.searchInput.value = '';
-    }
-
     render() {
         return (
             <header className="mb-3" style={headerStyle}>
@@ -31,7 +32,7 @@ export class SearchBar extends Component {
                     <li className="nav-item mx-4">
                         <FontAwesomeIcon icon={faBars} size="2x" />
                     </li>
-                    <li onClick={this.goHome} className="nav-item" style={{ color: 'red', cursor: 'pointer' }}>
+                    <li onClick={this.goHome} className="nav-item" style={iconStyle}>
                        <FontAwesomeIcon icon={faYoutube} size="2x" />
                         <span className="mb-5 text-dark font-weight-bolder">
                             <span>YouTube</span>
@@ -82,12 +83,15 @@ export class SearchBar extends Component {
 
 export default SearchBar
 
-
 const headerStyle = {
     boxShadow: '0px 2px 5px 0px rgba(133,121,133,.2)',
-    // borderBottom: 'solid 2px red',
     position: 'sticky',
     top: '0',
     zIndex: '1',
     background: 'white'
+}
+
+const iconStyle = { 
+    color: 'red',
+    cursor: 'pointer'
 }
