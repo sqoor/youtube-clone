@@ -107,7 +107,6 @@ export class VideoItem extends Component {
     }
     async componentDidMount() {
         const video = await this.youtubeAPICall();
-        console.log('video', video);
 
         this.setState({
             video: {

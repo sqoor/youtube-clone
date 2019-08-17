@@ -44,7 +44,7 @@ export class Results extends Component {
                 "id": "rg_zwK_sSEY"
             }
         ]
-        // return res; 
+        return res; 
 
         console.log(whatToSearchFor);
         const response = await axios.get('https://www.googleapis.com/youtube/v3/search', {

@@ -8,6 +8,8 @@ import { faThumbsUp, faThumbsDown, faShare, faEllipsisH, faBars } from '@fortawe
 
 import SuggestedVideosList from './SuggestedVideosList';
 import VideoDetails from './VideoDetails';
+import CommentsList from './CommentsList';
+
 
 import loading from './loading.gif';
 
@@ -74,7 +76,7 @@ export class Watch extends Component {
                 }
             ]
         }
-        // return res;
+        return res;
 
         const response = await axios.get('https://www.googleapis.com/youtube/v3/videos', {
             params: {
@@ -190,6 +192,9 @@ export class Watch extends Component {
                         <hr />
                         <div>
                             {channelId ? <VideoDetails details={{ description, publishedAt, channelId, channelTitle }} /> : ''}
+                            <div className="m-5">
+                                <CommentsList />
+                            </div>
                         </div>
                     </div>
                     <div className="col-4 ml-5">
