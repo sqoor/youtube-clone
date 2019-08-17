@@ -1,9 +1,9 @@
 // To Do:
 
 // routing in react
-1- click on video item open it on watch page                 - DONE 
-2- build search items pages 
-3- build homepage - popular videos                           - DO
+1- click on video item open it on watch page                - DONE 
+2- build search items pages                                 - done
+3- build homepage - popular videos                          - Done
 4- build comments in watch page
 
 not very important
@@ -12,7 +12,7 @@ not very important
 7- fix the iframe of the watch component
 8- add animation - waiting when waiting for the api to render the data. set in center of page
 9- Add advanced filtering
-
+10- description in homepage & result pages. passed to vidoeitem component.
 
 
 

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import moment from 'moment';
 import abbreviate from 'number-abbreviate';
+import loading from './loading.gif';
 
 /*
     // id title views duration, channelId, channelTitle
@@ -63,11 +64,8 @@ export class VideoItem extends Component {
                 }
             ]
         }
-        setTimeout(function() {
-            console.log('timeout 1')
-        }, 10000000);
 
-        return res.items[0];
+        // return res.items[0];
 
 
         const response = await axios.get('https://www.googleapis.com/youtube/v3/videos', {
@@ -78,6 +76,9 @@ export class VideoItem extends Component {
                 fields: 'items(id,snippet(title, channelId,channelTitle),statistics(viewCount),contentDetails(duration))'
             }
         });
+
+        console.log('this.props', this.props)
+        console.log('response.data.items',response.data.items);
         return response.data.items[0];
     }
 
@@ -95,6 +96,7 @@ export class VideoItem extends Component {
 
     async componentDidMount() {
         const video = await this.youtubeAPICall();
+        console.log('video', video);
 
         this.setState({
             video: {
@@ -106,22 +108,14 @@ export class VideoItem extends Component {
                 channelTitle: video.snippet.channelTitle
             }
         });
+
+        this.props.finishedLoading(this.props.id);
     }
 
     openVideo = () => {
-        console.log(`got to /watch/${this.state.video.id}`)
         window.location.href = `/watch?v=${this.state.video.id}`
-        this.setState({
-            watchVideo: true
-        });
+        this.setState({ watchVideo: true });
     }
-
-    whileLoadingShowAnimation() {
-        let isLoading = this.state.video.title.length < 1;
-
-        if(isLoading) return <h1>Loading...</h1>
-     }
-
 
     render() {
         const {
@@ -134,7 +128,6 @@ export class VideoItem extends Component {
 
         return (
             <div className="my-3 container-fluid" style={{ position: 'relative' }}>
-                 {this.whileLoadingShowAnimation()}
                 <div className="row">
                     <div
                         onClick={this.openVideo}

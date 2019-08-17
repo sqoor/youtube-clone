@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import VideoItem from './VideoItem';
+import { loading } from './loading.gif';
 
 export class SuggestedVideosList extends Component {
     state = {
-        suggestedVideos: []
+        suggestedVideos: [],
+        isLoading: true
     }
 
     async youtubeAPICall() {
@@ -81,10 +83,22 @@ export class SuggestedVideosList extends Component {
             suggestedVideos: response.items.map(v => v.id.videoId)
         });
     }
+
+    finishedLoading = () => {
+        this.setState({
+            isLoading: false
+        })
+    }
+
+    whileLoadingShowAnimation() {
+        if(this.state.isLoading)
+            return <img src={loading} alt="loading..." width="70px"/> 
+    }
     
     render() {
         return (
             <div style={{ border: '0px solid red' }}>
+                {this.whileLoadingShowAnimation()}
                 <div>
                     Up next
                     <form className="form-inline range-field d-inline  float-right">
@@ -98,13 +112,13 @@ export class SuggestedVideosList extends Component {
                     if (i === 0) {
                         return (
                             <React.Fragment key={videoId}>
-                                <VideoItem key={videoId} id={videoId} />
+                                <VideoItem key={videoId} id={videoId} finishedLoading={this.finishedLoading} />
                                 <hr  />
                             </React.Fragment>
                         );
                     }
 
-                    return <VideoItem key={videoId} id={videoId} />
+                    return <VideoItem key={videoId} id={videoId} finishedLoading={this.finishedLoading} />
                 })}
             </div>
         )
