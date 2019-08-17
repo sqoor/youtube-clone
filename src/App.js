@@ -6,8 +6,6 @@ import SearchBar from './components/SearchBar';
 import Watch from './components/Watch';
 import Results from './components/Results';
 
-import './App.css';
-
 export default function App() {
   return (
     <div className="App">
